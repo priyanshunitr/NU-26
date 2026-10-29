@@ -1,7 +1,7 @@
 import { useId } from 'react'
 import collage from '../../assets/collage.jpg'
 import logo from '../../assets/logo.svg'
-import registerPaper from '../../assets/register-paper.jpg'
+import registerPaper from '../../assets/register-paper.png'
 import PosterTrail from './PosterTrail.jsx'
 import './Hero.css'
 

@@ -1,0 +1,117 @@
+.about__grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(40px, 6vw, 80px);
+  align-items: center;
+}
+
+.about__copy p {
+  max-width: 56ch;
+  margin-bottom: 16px;
+  font-size: clamp(18px, 1.6vw, 20px);
+}
+
+.about__copy strong {
+  color: var(--maroon);
+  font-weight: 800;
+}
+
+.about__btn {
+  margin-top: 8px;
+}
+
+.about__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 32px;
+  list-style: none;
+}
+
+/* Round "rubber stamp" stats. */
+.about__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 3px dashed var(--ink);
+  outline: 6px solid var(--paper);
+  box-shadow: 0 0 0 9px var(--ink);
+  text-align: center;
+}
+
+.about__stat:nth-child(1) { background: var(--rani); color: var(--cream); transform: rotate(-6deg); }
+.about__stat:nth-child(2) { background: var(--marigold); color: var(--ink); transform: rotate(4deg); }
+.about__stat:nth-child(3) { background: var(--peacock); color: var(--cream); transform: rotate(-2deg); }
+
+.about__stat-value {
+  font-family: var(--font-display);
+  font-size: 44px;
+  line-height: 1;
+}
+
+.about__stat-label {
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Posters pinned in a messy stack. */
+.about__art {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  max-width: 440px;
+  width: 100%;
+  justify-self: center;
+}
+
+.about__poster {
+  position: absolute;
+  width: 58%;
+  aspect-ratio: 150 / 205;
+  object-fit: cover;
+  border: 6px solid var(--cream);
+  box-shadow: 6px 8px 0 var(--ink);
+}
+
+.about__poster--back  { left: 0;   top: 4%;  transform: rotate(-9deg); }
+.about__poster--mid   { right: 0;  top: 0;   transform: rotate(7deg); }
+.about__poster--front { left: 21%; bottom: 0; transform: rotate(-2deg); }
+
+.about__badge {
+  position: absolute;
+  right: 2%;
+  bottom: 8%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 128px;
+  aspect-ratio: 1;
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 1.1;
+  color: var(--ink);
+  background: var(--marigold);
+  border: 3px solid var(--ink);
+  /* 12-point starburst */
+  clip-path: polygon(50% 0%, 61% 13%, 75% 7%, 79% 22%, 93% 25%, 88% 39%, 100% 50%, 88% 61%, 93% 75%, 79% 78%, 75% 93%, 61% 87%, 50% 100%, 39% 87%, 25% 93%, 21% 78%, 7% 75%, 12% 61%, 0% 50%, 12% 39%, 7% 25%, 21% 22%, 25% 7%, 39% 13%);
+  transform: rotate(10deg);
+}
+
+.about__badge [lang="hi"] {
+  font-size: 30px;
+  color: var(--maroon);
+}
+
+@media (max-width: 800px) {
+  .about__grid { grid-template-columns: 1fr; }
+  .about__stat { width: 96px; }
+  .about__stat-value { font-size: 34px; }
+  .about__stat-label { font-size: 13px; }
+}

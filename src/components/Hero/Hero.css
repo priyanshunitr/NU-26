@@ -1,10 +1,14 @@
-/* The hero is designed on a 1308 × 736 frame. Everything inside is sized in
+/* The hero is designed on a 1308 × 651 frame. Everything inside is sized in
    design pixels via --u so the whole composition scales with the viewport. */
 .hero {
+  /* Keep the hero's original type settings regardless of the site-wide body styles. */
+  font-family: var(--font-display);
+  font-size: 16px;
+  line-height: normal;
   container-type: inline-size;
   position: relative;
   width: 100%;
-  aspect-ratio: 1308 / 736;
+  aspect-ratio: 1308 / 651;
   overflow: hidden;
   background: var(--cream);
 }
@@ -15,11 +19,12 @@
   inset: 0;
 }
 
-/* Collage artwork is stored portrait (736 × 1308) and rotated -90° in the design. */
+/* Collage artwork is stored portrait (736 × 1308) and rotated -90° in the design.
+   Its rotated 1308 × 736 box starts 85px above the frame, so its centre is at y = 283. */
 .hero__collage {
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: calc(283 * var(--u));
   width: calc(736 * var(--u));
   height: calc(1308 * var(--u));
   object-fit: cover;
@@ -84,7 +89,7 @@
 
 .hero__title {
   position: absolute;
-  top: calc(175 * var(--u));
+  top: calc(145 * var(--u));
   left: 50%;
   transform: translateX(-50%);
   width: calc(726 * var(--u));
@@ -100,19 +105,22 @@
 .hero__register {
   position: absolute;
   left: calc(495 * var(--u));
-  top: calc(410 * var(--u));
+  top: calc(340 * var(--u));
   width: calc(352 * var(--u));
-  height: calc(147 * var(--u));
+  height: calc(155 * var(--u));
+  overflow: hidden;
   display: block;
   text-decoration: none;
 }
 
+/* Transparent torn-paper PNG (736 × 1308); Figma shows only a horizontal slice of it. */
 .hero__register img {
   position: absolute;
-  inset: 0;
+  left: 0;
+  top: -154.15%;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: 402.46%;
+  max-width: none;
   pointer-events: none;
 }
 

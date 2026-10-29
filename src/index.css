@@ -1,15 +1,49 @@
 :root {
   --cream: #fcf9ed;
+  --paper: #f7f3e7; /* empty paper colour of the hero collage */
   --ink: #000;
+  --ink-soft: #1f1410;
   --ink-muted: rgba(0, 0, 0, 0.61);
+
+  /* Truck-art palette */
+  --maroon: #7a1424;
+  --marigold: #f2a516;
+  --saffron: #e8641b;
+  --rani: #d6246e;
+  --peacock: #0f6e6e;
+  --indigo: #2b2a72;
+  --parrot: #3f8f3a;
+
+  --font-display: "Irish Grover", system-ui, sans-serif;
+  --font-body: "Baloo 2", system-ui, sans-serif;
+
+  --gutter: 16px;
+  --container: 1200px;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-body {
-  background: var(--cream);
-  font-family: "Irish Grover", system-ui, sans-serif;
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }
+
+body {
+  background: var(--paper);
+  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* The tilted ticker pokes past the viewport edges; clip it without a scroll container. */
+main { overflow-x: clip; }
+
+a { color: inherit; }
+
+img { display: block; max-width: 100%; }
 
 .sr-only {
   position: absolute;
@@ -17,4 +51,60 @@ body {
   overflow: hidden;
   clip: rect(0 0 0 0);
   white-space: nowrap;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.section {
+  position: relative;
+  padding: clamp(64px, 10vw, 128px) 0;
+  scroll-margin-top: 16px;
+}
+
+/* Truck-art zigzag strip used between sections. Set --zz to its colour. */
+.zigzag {
+  height: 24px;
+  background:
+    linear-gradient(135deg, var(--zz, var(--maroon)) 25%, transparent 25%) -12px 0 / 24px 24px,
+    linear-gradient(225deg, var(--zz, var(--maroon)) 25%, transparent 25%) -12px 0 / 24px 24px;
+}
+
+/* Fine dot texture laid over flat colour blocks. */
+.dots {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.12) 1.4px, transparent 1.6px);
+  background-size: 16px 16px;
+}
+
+/* Chunky sticker-style button with a hard offset shadow. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-family: var(--font-display);
+  font-size: 20px;
+  line-height: 1;
+  color: var(--cream);
+  background: var(--maroon);
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: 4px 4px 0 var(--ink);
+  text-decoration: none;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background: var(--rani);
+}
+
+.btn:focus-visible,
+a:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--marigold);
+  outline-offset: 3px;
 }

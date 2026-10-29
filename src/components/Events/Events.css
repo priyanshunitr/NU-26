@@ -1,0 +1,107 @@
+.events {
+  background:
+    radial-gradient(rgba(122, 20, 36, 0.12) 1.4px, transparent 1.6px) 0 0 / 18px 18px,
+    var(--cream);
+}
+
+.events__intro {
+  max-width: 52ch;
+  margin: -24px auto 48px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.events__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+  gap: 28px;
+  list-style: none;
+}
+
+.event-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 300px;
+  padding: 28px 24px 24px;
+  color: var(--card-fg);
+  background: var(--card-bg);
+  border: 3px solid var(--ink);
+  border-radius: 20px 20px 4px 4px;
+  box-shadow: 6px 6px 0 var(--ink);
+  overflow: hidden;
+}
+
+/* Inner dashed frame, like the painted borders on a Tata truck. */
+.event-card::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 2px dashed var(--card-accent);
+  border-radius: 14px 14px 2px 2px;
+  pointer-events: none;
+}
+
+/* Scalloped valance along the bottom edge. */
+.event-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 14px;
+  background: radial-gradient(circle at 10px 14px, var(--card-accent) 9px, transparent 10px) 0 0 / 20px 14px repeat-x;
+}
+
+.event-card:nth-child(odd) { transform: rotate(-1deg); }
+.event-card:nth-child(even) { transform: rotate(1deg); }
+
+.event-card__hindi {
+  font-weight: 800;
+  font-size: 56px;
+  line-height: 1;
+  color: var(--card-accent);
+  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.25);
+}
+
+.event-card__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 1.1;
+}
+
+.event-card__tag {
+  align-self: flex-start;
+  padding: 0 10px;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--card-bg);
+  background: var(--card-accent);
+}
+
+.event-card__blurb {
+  flex: 1;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.event-card__link {
+  align-self: flex-start;
+  margin-bottom: 12px;
+  padding: 4px 16px;
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--card-bg);
+  background: var(--card-fg);
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+.event-card__link:hover {
+  background: var(--card-accent);
+  color: var(--ink);
+}

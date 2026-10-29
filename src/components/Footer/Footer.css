@@ -1,0 +1,152 @@
+.footer {
+  position: relative;
+  color: var(--cream);
+  background:
+    radial-gradient(rgba(242, 165, 22, 0.16) 1.4px, transparent 1.6px) 0 0 / 18px 18px,
+    var(--maroon);
+  border-top: 3px solid var(--ink);
+}
+
+/* Marigold garland (toran) hanging from the top edge. */
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  background:
+    radial-gradient(circle at 14px 6px, var(--marigold) 9px, transparent 10px) 0 0 / 28px 28px repeat-x,
+    radial-gradient(circle at 28px 14px, var(--saffron) 6px, transparent 7px) 0 0 / 28px 28px repeat-x;
+}
+
+.footer__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(32px, 5vw, 56px);
+  padding-top: clamp(72px, 9vw, 112px);
+  padding-bottom: 32px;
+}
+
+.footer__socials {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px 40px;
+  list-style: none;
+}
+
+.footer__social {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 24px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.footer__social:hover { color: var(--marigold); }
+
+/* The logo SVG is black; invert it to cream for the dark footer. */
+.footer__logo {
+  width: min(100%, 960px);
+  height: auto;
+  filter: invert(96%) sepia(8%) saturate(400%) hue-rotate(10deg) drop-shadow(5px 5px 0 var(--ink));
+}
+
+.footer__contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  text-align: center;
+}
+
+.footer__heading {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1;
+  color: var(--marigold);
+}
+
+.footer__people {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  width: 100%;
+  list-style: none;
+}
+
+.footer__person {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  border: 2px dashed rgba(252, 249, 237, 0.45);
+  border-radius: 12px;
+}
+
+.footer__person-name {
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.footer__person-role {
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--marigold);
+}
+
+.footer__person a {
+  margin-top: 4px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.footer__person a:hover { color: var(--marigold); }
+
+.footer__address {
+  max-width: 48ch;
+  font-style: normal;
+  font-size: 15px;
+  opacity: 0.85;
+}
+
+.footer__credit a:hover { color: var(--marigold); }
+
+.footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 32px;
+  width: 100%;
+  padding-top: 24px;
+  border-top: 2px dashed rgba(252, 249, 237, 0.35);
+}
+
+.footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+  list-style: none;
+  font-size: 16px;
+}
+
+.footer__legal a:hover { color: var(--marigold); }
+
+.footer__credit {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.footer__heart { color: var(--rani); }
+
+@media (max-width: 600px) {
+  .footer__bottom { justify-content: center; text-align: center; }
+  .footer__legal { justify-content: center; }
+}

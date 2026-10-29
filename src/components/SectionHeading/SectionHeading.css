@@ -1,0 +1,52 @@
+.section-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: clamp(40px, 6vw, 64px);
+}
+
+.section-heading--center { align-items: center; text-align: center; }
+.section-heading--left { align-items: flex-start; text-align: left; }
+
+.section-heading__kicker {
+  display: inline-block;
+  padding: 2px 16px;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--ink);
+  background: var(--marigold);
+  border: 2px solid var(--ink);
+  transform: rotate(-3deg);
+}
+
+.section-heading__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(44px, 8vw, 88px);
+  line-height: 1;
+  color: var(--ink);
+  text-shadow: 4px 4px 0 var(--rani);
+}
+
+.section-heading--light .section-heading__title {
+  color: var(--cream);
+  text-shadow: 4px 4px 0 var(--ink);
+}
+
+/* Diamond chain ornament, like the borders on painted trucks. */
+.section-heading__rule {
+  width: min(280px, 70%);
+  height: 16px;
+  background:
+    conic-gradient(from 45deg at 50% 50%, var(--maroon) 25%, transparent 0 50%, var(--maroon) 0 75%, transparent 0)
+      0 0 / 16px 16px,
+    linear-gradient(var(--marigold), var(--marigold)) center / 100% 4px no-repeat;
+}
+
+.section-heading--light .section-heading__rule {
+  background:
+    conic-gradient(from 45deg at 50% 50%, var(--marigold) 25%, transparent 0 50%, var(--marigold) 0 75%, transparent 0)
+      0 0 / 16px 16px,
+    linear-gradient(var(--cream), var(--cream)) center / 100% 4px no-repeat;
+}

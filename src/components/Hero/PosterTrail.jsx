@@ -26,14 +26,16 @@ const POSTERS = [
 ]
 
 const FRAME_W = 1308
-const FRAME_H = 736
+const FRAME_H = 651
+const COLLAGE_H = 736 // rotated collage height; it starts above the frame
+const COLLAGE_TOP = -85
 const SPAWN_DISTANCE = 70 // design px the pointer must travel between posters
 const LIFETIME_MS = 1000
 const BEIGE = [247, 243, 231] // empty paper colour of the collage
 const BEIGE_TOLERANCE = 12
 
 // Renders the collage the same way the hero does (rotated -90°) so we can tell
-// whether a point in the 1308 × 736 frame is empty beige paper.
+// whether a point in the 1308 × 651 frame is empty beige paper.
 function loadBeigeMap() {
   return new Promise((resolve) => {
     const img = new Image()
@@ -42,9 +44,9 @@ function loadBeigeMap() {
       canvas.width = FRAME_W
       canvas.height = FRAME_H
       const ctx = canvas.getContext('2d', { willReadFrequently: true })
-      ctx.translate(FRAME_W / 2, FRAME_H / 2)
+      ctx.translate(FRAME_W / 2, COLLAGE_TOP + COLLAGE_H / 2)
       ctx.rotate(-Math.PI / 2)
-      ctx.drawImage(img, -FRAME_H / 2, -FRAME_W / 2, FRAME_H, FRAME_W)
+      ctx.drawImage(img, -COLLAGE_H / 2, -FRAME_W / 2, COLLAGE_H, FRAME_W)
       resolve(ctx.getImageData(0, 0, FRAME_W, FRAME_H).data)
     }
     img.src = collage
