@@ -47,6 +47,8 @@
 .about__stat:nth-child(2) { background: var(--marigold); color: var(--ink); transform: rotate(4deg); }
 .about__stat:nth-child(3) { background: var(--peacock); color: var(--cream); transform: rotate(-2deg); }
 
+.about__stat:hover { animation: wobble 0.6s ease-in-out; }
+
 .about__stat-value {
   font-family: var(--font-display);
   font-size: 44px;
@@ -70,6 +72,7 @@
   justify-self: center;
 }
 
+/* --px / --py (-1…1) are set from the pointer position; --depth sets how far each layer drifts. */
 .about__poster {
   position: absolute;
   width: 58%;
@@ -77,13 +80,28 @@
   object-fit: cover;
   border: 6px solid var(--cream);
   box-shadow: 6px 8px 0 var(--ink);
+  transform:
+    translate(calc(var(--px, 0) * var(--depth)), calc(var(--py, 0) * var(--depth)))
+    rotate(var(--tilt))
+    scale(var(--lift, 1));
 }
 
-.about__poster--back  { left: 0;   top: 4%;  transform: rotate(-9deg); }
-.about__poster--mid   { right: 0;  top: 0;   transform: rotate(7deg); }
-.about__poster--front { left: 21%; bottom: 0; transform: rotate(-2deg); }
+.about__poster--back  { --depth: 10px; --tilt: -9deg; left: 0;   top: 4%; }
+.about__poster--mid   { --depth: 20px; --tilt: 7deg;  right: 0;  top: 0; }
+.about__poster--front { --depth: 32px; --tilt: -2deg; left: 21%; bottom: 0; }
+
+/* Pointing at a poster pulls it to the front of the stack. */
+.about__poster:hover {
+  --lift: 1.06;
+  --tilt: 0deg;
+  z-index: 2;
+  box-shadow: 10px 12px 0 var(--ink);
+}
 
 .about__badge {
+  isolation: isolate;
+  z-index: 3;
+  animation: bob 3s ease-in-out infinite;
   position: absolute;
   right: 2%;
   bottom: 8%;
@@ -97,11 +115,18 @@
   font-size: 14px;
   line-height: 1.1;
   color: var(--ink);
-  background: var(--marigold);
-  border: 3px solid var(--ink);
-  /* 12-point starburst */
-  clip-path: polygon(50% 0%, 61% 13%, 75% 7%, 79% 22%, 93% 25%, 88% 39%, 100% 50%, 88% 61%, 93% 75%, 79% 78%, 75% 93%, 61% 87%, 50% 100%, 39% 87%, 25% 93%, 21% 78%, 7% 75%, 12% 61%, 0% 50%, 12% 39%, 7% 25%, 21% 22%, 25% 7%, 39% 13%);
   transform: rotate(10deg);
+}
+
+/* 12-point starburst behind the text; it spins while the words stay readable. */
+.about__badge::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--marigold);
+  clip-path: polygon(50% 0%, 61% 13%, 75% 7%, 79% 22%, 93% 25%, 88% 39%, 100% 50%, 88% 61%, 93% 75%, 79% 78%, 75% 93%, 61% 87%, 50% 100%, 39% 87%, 25% 93%, 21% 78%, 7% 75%, 12% 61%, 0% 50%, 12% 39%, 7% 25%, 21% 22%, 25% 7%, 39% 13%);
+  animation: spin 18s linear infinite;
 }
 
 .about__badge [lang="hi"] {

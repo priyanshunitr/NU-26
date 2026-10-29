@@ -1,0 +1,99 @@
+/* Site-wide motion: scroll entrances plus the small playful loops.
+   Entrances use the individual translate / scale / rotate properties so they
+   never fight the `transform` rotations that give stickers and cards their tilt. */
+
+:root {
+  --spring: cubic-bezier(0.2, 0.9, 0.3, 1.35);
+  interpolate-size: allow-keywords;
+}
+
+[data-reveal] {
+  --rd: calc(var(--d, 0) * 90ms);
+  opacity: 0;
+  transition:
+    opacity 0.5s ease var(--rd),
+    translate 0.7s var(--spring) var(--rd),
+    scale 0.6s var(--spring) var(--rd),
+    rotate 0.7s var(--spring) var(--rd),
+    transform 0.35s ease-out,
+    box-shadow 0.35s ease-out;
+}
+
+[data-reveal].is-visible { opacity: 1; }
+
+/* Float up from below. */
+[data-reveal="rise"] { translate: 0 48px; }
+[data-reveal="rise"].is-visible { translate: none; }
+
+/* Slapped on like a sticker: big, crooked, then snaps flat. */
+[data-reveal="slap"] { scale: 1.4; rotate: -8deg; }
+[data-reveal="slap"].is-visible { scale: none; rotate: none; }
+
+/* Rubber stamp thump. */
+[data-reveal="stamp"] { scale: 2.2; }
+[data-reveal="stamp"].is-visible { scale: none; }
+
+/* Swings down on its hook, like bunting. */
+[data-reveal="swing"] { rotate: -14deg; translate: 0 -32px; transform-origin: top center; }
+[data-reveal="swing"].is-visible { rotate: none; translate: none; }
+
+/* Ornament rule draws itself outwards. */
+[data-reveal="grow-x"] { scale: 0 1; }
+[data-reveal="grow-x"].is-visible { scale: none; }
+
+/* ---- Loops and hover flourishes ---- */
+
+@keyframes wiggle {
+  0%, 100% { rotate: 0deg; }
+  25% { rotate: -6deg; }
+  75% { rotate: 6deg; }
+}
+
+@keyframes wobble {
+  0%, 100% { rotate: 0deg; }
+  30% { rotate: 14deg; }
+  60% { rotate: -10deg; }
+  80% { rotate: 4deg; }
+}
+
+@keyframes spin {
+  to { rotate: 360deg; }
+}
+
+@keyframes swing {
+  0%, 100% { rotate: 0deg; }
+  25% { rotate: 4deg; }
+  75% { rotate: -4deg; }
+}
+
+@keyframes sway {
+  from { translate: -7px 0; }
+  to { translate: 7px 0; }
+}
+
+@keyframes shine {
+  from { translate: -120% 0; }
+  to { translate: 220% 0; }
+}
+
+@keyframes bob {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    translate: none;
+    scale: none;
+    rotate: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

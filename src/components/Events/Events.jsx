@@ -42,22 +42,41 @@ const EVENTS = [
   },
 ]
 
+// 3D tilt toward the pointer, like holding a poster up to the light.
+function tilt(e) {
+  if (e.pointerType !== 'mouse') return
+  const card = e.currentTarget
+  const r = card.getBoundingClientRect()
+  const x = (e.clientX - r.left) / r.width - 0.5
+  const y = (e.clientY - r.top) / r.height - 0.5
+  card.style.setProperty('--ry', `${(x * 14).toFixed(2)}deg`)
+  card.style.setProperty('--rx', `${(-y * 14).toFixed(2)}deg`)
+}
+
+function untilt(e) {
+  e.currentTarget.style.setProperty('--ry', '0deg')
+  e.currentTarget.style.setProperty('--rx', '0deg')
+}
+
 export default function Events() {
   return (
     <section id="events" className="section events">
       <div className="container">
         <SectionHeading kicker="कार्यक्रम" title="Events" />
-        <p className="events__intro">
+        <p className="events__intro" data-reveal="rise">
           Three days of high-energy events and captivating performances. Here&rsquo;s what&rsquo;s
           been announced so far &mdash; full rules and registration are on each event page.
         </p>
 
         <ul className="events__grid">
-          {EVENTS.map(({ hindi, title, tag, blurb, href, cta, bg, fg, accent }) => (
+          {EVENTS.map(({ hindi, title, tag, blurb, href, cta, bg, fg, accent }, i) => (
             <li
               key={title}
               className="event-card"
-              style={{ '--card-bg': bg, '--card-fg': fg, '--card-accent': accent }}
+              data-reveal="rise"
+              style={{ '--card-bg': bg, '--card-fg': fg, '--card-accent': accent, '--d': i % 3 }}
+              onPointerMove={tilt}
+              onPointerLeave={untilt}
             >
               <span className="event-card__hindi" lang="hi" aria-hidden="true">{hindi}</span>
               <h3 className="event-card__title">{title}</h3>

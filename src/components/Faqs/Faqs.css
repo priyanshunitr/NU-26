@@ -53,9 +53,26 @@
   color: var(--maroon);
 }
 
-.faq[open] .faq__q::after { content: "−"; }
+/* "+" spins into "×" when open. */
+.faq__q::after { transition: rotate 0.3s var(--spring); }
+.faq[open] .faq__q::after { rotate: 135deg; }
+
+.faq:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0 var(--ink);
+}
+
+/* Smooth open/close where the browser supports animating <details> (Chromium); instant elsewhere. */
+.faq::details-content {
+  block-size: 0;
+  overflow-y: clip;
+  transition: block-size 0.35s ease, content-visibility 0.35s allow-discrete;
+}
+
+.faq[open]::details-content { block-size: auto; }
 
 .faq__num {
+  transition: rotate 0.5s var(--spring), background-color 0.2s;
   flex-shrink: 0;
   display: grid;
   place-items: center;
@@ -66,6 +83,11 @@
   color: var(--cream);
   background: var(--maroon);
   border-radius: 50%;
+}
+
+.faq[open] .faq__num {
+  rotate: 360deg;
+  background: var(--rani);
 }
 
 .faq__a {

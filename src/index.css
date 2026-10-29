@@ -97,9 +97,21 @@ img { display: block; max-width: 100%; }
   text-decoration: none;
 }
 
+/* Pressable: lifts on hover, pushes into its shadow on click. */
+.btn {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.2s;
+}
+
 .btn:hover,
 .btn:focus-visible {
   background: var(--rani);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 var(--ink);
 }
 
 .btn:focus-visible,

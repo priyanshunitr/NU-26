@@ -39,7 +39,7 @@ export default function Footer() {
   return (
     <footer id="contact" className="footer">
       <div className="footer__inner container">
-        <ul className="footer__socials">
+        <ul className="footer__socials" data-reveal="rise">
           {SOCIALS.map(({ label, href, icon }) => (
             <li key={label}>
               <a className="footer__social" href={href} {...ext}>
@@ -50,13 +50,13 @@ export default function Footer() {
           ))}
         </ul>
 
-        <img className="footer__logo" src={logo} width="726" height="162" alt="Nitrutsav 2026 — NIT Rourkela" />
+        <img className="footer__logo" src={logo} width="726" height="162" alt="Nitrutsav 2026 — NIT Rourkela" data-reveal="slap" />
 
         <div className="footer__contact">
-          <h2 className="footer__heading">Contact us</h2>
+          <h2 className="footer__heading" data-reveal="rise">Contact us</h2>
           <ul className="footer__people">
-            {CONTACTS.map(({ name, role, phone }) => (
-              <li key={name} className="footer__person">
+            {CONTACTS.map(({ name, role, phone }, i) => (
+              <li key={name} className="footer__person" data-reveal="rise" style={{ '--d': i }}>
                 <span className="footer__person-name">{name}</span>
                 <span className="footer__person-role">{role}</span>
                 <a href={`tel:${phone.replace(/\s/g, '')}`}>{phone}</a>

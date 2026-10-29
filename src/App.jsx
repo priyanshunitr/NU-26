@@ -5,8 +5,11 @@ import Events from './components/Events/Events.jsx'
 import Faqs from './components/Faqs/Faqs.jsx'
 import Sponsors from './components/Sponsors/Sponsors.jsx'
 import Footer from './components/Footer/Footer.jsx'
+import useReveal from './lib/useReveal.js'
 
 export default function App() {
+  useReveal()
+
   return (
     <>
       <Hero />

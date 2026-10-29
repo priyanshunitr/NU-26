@@ -48,7 +48,7 @@ export default function Faqs() {
         <SectionHeading kicker="सवाल जवाब" title="FAQs" />
         <div className="faqs__list">
           {FAQS.map(({ q, a }, i) => (
-            <details key={q} className="faq" open={i === 0}>
+            <details key={q} className="faq" open={i === 0} data-reveal="rise" style={{ '--d': i }}>
               <summary className="faq__q">
                 <span className="faq__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
                 <span>{q}</span>

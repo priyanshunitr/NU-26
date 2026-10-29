@@ -45,6 +45,10 @@
   color: var(--rani);
 }
 
+.ticker:hover .ticker__track {
+  animation-play-state: paused;
+}
+
 @keyframes ticker {
   to { transform: translateX(-50%); }
 }

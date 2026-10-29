@@ -54,10 +54,33 @@
   background: radial-gradient(circle at 10px 14px, var(--card-accent) 9px, transparent 10px) 0 0 / 20px 14px repeat-x;
 }
 
-.event-card:nth-child(odd) { transform: rotate(-1deg); }
-.event-card:nth-child(even) { transform: rotate(1deg); }
+/* --rx / --ry come from the pointer (see tilt() in Events.jsx). */
+.event-card {
+  transform:
+    perspective(900px)
+    translate(var(--lift, 0), var(--lift, 0))
+    rotate(var(--base, 0deg))
+    rotateX(var(--rx, 0deg))
+    rotateY(var(--ry, 0deg));
+}
+
+.event-card:nth-child(odd) { --base: -1deg; }
+.event-card:nth-child(even) { --base: 1deg; }
+
+.event-card:hover {
+  --base: 0deg;
+  --lift: -6px;
+  box-shadow: 12px 12px 0 var(--ink);
+}
+
+.event-card:hover .event-card__hindi {
+  animation: wiggle 0.5s ease-in-out 2;
+}
 
 .event-card__hindi {
+  display: inline-block;
+  align-self: flex-start;
+  transform-origin: 30% 80%;
   font-weight: 800;
   font-size: 56px;
   line-height: 1;

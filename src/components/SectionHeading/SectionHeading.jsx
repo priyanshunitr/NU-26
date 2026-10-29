@@ -4,9 +4,9 @@ import './SectionHeading.css'
 export default function SectionHeading({ kicker, title, tone = 'dark', align = 'center' }) {
   return (
     <header className={`section-heading section-heading--${tone} section-heading--${align}`}>
-      <span className="section-heading__kicker" lang="hi">{kicker}</span>
-      <h2 className="section-heading__title">{title}</h2>
-      <span className="section-heading__rule" aria-hidden="true" />
+      <span className="section-heading__kicker" lang="hi" data-reveal="slap">{kicker}</span>
+      <h2 className="section-heading__title" data-reveal="rise" style={{ '--d': 1 }}>{title}</h2>
+      <span className="section-heading__rule" aria-hidden="true" data-reveal="grow-x" style={{ '--d': 2 }} />
     </header>
   )
 }

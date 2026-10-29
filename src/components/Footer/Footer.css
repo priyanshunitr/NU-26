@@ -8,12 +8,17 @@
 }
 
 /* Marigold garland (toran) hanging from the top edge. */
+.footer {
+  overflow-x: clip;
+}
+
 .footer::before {
   content: "";
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
+  left: -14px;
+  right: -14px;
+  animation: sway 2.6s ease-in-out infinite alternate;
   height: 28px;
   background:
     radial-gradient(circle at 14px 6px, var(--marigold) 9px, transparent 10px) 0 0 / 28px 28px repeat-x,
@@ -48,6 +53,10 @@
 }
 
 .footer__social:hover { color: var(--marigold); }
+
+.footer__social:hover svg { animation: wobble 0.6s ease-in-out; }
+
+.footer__logo:hover { animation: wiggle 0.6s ease-in-out; }
 
 /* The logo SVG is black; invert it to cream for the dark footer. */
 .footer__logo {
@@ -109,6 +118,12 @@
 
 .footer__person a:hover { color: var(--marigold); }
 
+.footer__person:hover {
+  transform: translateY(-4px);
+  border-color: var(--marigold);
+  border-style: solid;
+}
+
 .footer__address {
   max-width: 48ch;
   font-style: normal;
@@ -144,7 +159,17 @@
   font-size: 16px;
 }
 
-.footer__heart { color: var(--rani); }
+.footer__heart {
+  display: inline-block;
+  color: var(--rani);
+  animation: heartbeat 1.4s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 60%, 100% { scale: 1; }
+  15%, 35% { scale: 1.35; }
+  25% { scale: 1.1; }
+}
 
 @media (max-width: 600px) {
   .footer__bottom { justify-content: center; text-align: center; }
