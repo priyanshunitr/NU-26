@@ -1,0 +1,20 @@
+:root {
+  --cream: #fcf9ed;
+  --ink: #000;
+  --ink-muted: rgba(0, 0, 0, 0.61);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--cream);
+  font-family: "Irish Grover", system-ui, sans-serif;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
