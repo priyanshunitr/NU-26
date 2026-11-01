@@ -1,0 +1,13 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="94" height="94" viewBox="0 0 94 94" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Printed flower">
+<path id="Flower centre" d="M60.6 47C60.6 54.5111 54.5111 60.6 47 60.6C39.4889 60.6 33.4 54.5111 33.4 47C33.4 39.4889 39.4889 33.4 47 33.4C54.5111 33.4 60.6 39.4889 60.6 47Z" fill="#F5C545" stroke="#24221C"/>
+<circle id="Petal" cx="63.617" cy="30.383" r="15.04" fill="#075A52"/>
+<circle id="Petal_2" cx="47" cy="23.5" r="15.04" fill="#075A52"/>
+<circle id="Petal_3" cx="30.383" cy="30.383" r="15.04" fill="#075A52"/>
+<circle id="Petal_4" cx="23.5" cy="47" r="15.04" fill="#075A52"/>
+<circle id="Petal_5" cx="30.383" cy="63.617" r="15.04" fill="#075A52"/>
+<circle id="Petal_6" cx="47" cy="70.5" r="15.04" fill="#075A52"/>
+<circle id="Petal_7" cx="63.617" cy="63.617" r="15.04" fill="#075A52"/>
+<circle id="Petal_8" cx="70.5" cy="47" r="15.04" fill="#075A52"/>
+</g>
+</svg>

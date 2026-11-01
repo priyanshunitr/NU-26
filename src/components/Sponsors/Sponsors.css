@@ -1,107 +1,439 @@
+/* Sponsors NU'26 — matches the Figma frame (1728 × 1349). Colours and type
+   are the frame's own; sizes scale down with clamp() for smaller screens. */
+
 .sponsors {
-  color: var(--cream);
-  background:
-    radial-gradient(rgba(242, 165, 22, 0.18) 1.4px, transparent 1.6px) 0 0 / 18px 18px,
-    var(--peacock);
+  --nu-teal: #075a52;
+  --nu-red: #a71e2d;
+  --nu-gold: #f5c545;
+  --nu-cream: #fcf9ed;
+  --nu-beige: #f3ebcf;
+  --nu-ink: #24221c;
+  --nu-grey: #625b4b;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  background: var(--nu-teal);
+  color: var(--nu-ink);
+  scroll-margin-top: 16px;
 }
 
-.sponsors__intro {
-  max-width: 52ch;
-  margin: -24px auto 48px;
-  text-align: center;
-  font-size: 20px;
+/* ---- Collage margins (only on wide screens, where the frame has room) ---- */
+
+.sponsors__margin {
+  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  overflow: hidden;
+  pointer-events: none;
 }
 
-.sponsors__grid {
+.sponsors__margin--left { left: 0; }
+.sponsors__margin--right { right: 0; }
+
+.sponsors__edging {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 470px;
+  margin-top: 30px;
+  padding: 22px 0;
+  background: var(--nu-red);
+}
+
+/* The hero collage, rotated the same way as in the hero, clipped to the margin. */
+.sponsors__ephemera {
+  position: absolute;
+  top: 498px;
+  width: 1728px;
+  height: 972px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  place-items: center;
+}
+
+.sponsors__margin--left .sponsors__ephemera { left: 0; }
+.sponsors__margin--right .sponsors__ephemera { right: 0; }
+
+.sponsors__ephemera img {
+  width: 972px;
+  height: 1728px;
+  object-fit: cover;
+  rotate: -90deg;
+}
+
+@media (min-width: 1500px) {
+  .sponsors__margin { display: block; }
+}
+
+/* ---- Block-print borders ---- */
+
+.sponsors__border {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 30px;
+  padding: 0 12px;
+  font-family: "Lora", serif;
+  font-size: 23px;
+  line-height: 1;
+  color: var(--nu-cream);
+  overflow: hidden;
+}
+
+.sponsors__border span:nth-child(even) { color: var(--nu-gold); }
+
+@media (max-width: 700px) {
+  .sponsors__border span:nth-child(3n), .sponsors__border span:nth-child(3n + 1) { display: none; }
+}
+
+/* ---- The broadside ---- */
+
+.broadside {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  width: min(1424px, 100% - 32px);
+  padding: clamp(24px, 3vw, 38px) clamp(16px, 4.5vw, 64px) clamp(28px, 3vw, 44px);
+  background: var(--nu-cream);
+}
+
+.masthead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.masthead__flower {
+  width: clamp(48px, 6.5vw, 94px);
+  height: auto;
+  animation: spin 40s linear infinite;
+}
+
+.masthead__flower:last-child { animation-direction: reverse; }
+
+.masthead__heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.masthead__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(56px, 7.8vw, 112px);
+  line-height: 1.05;
+  letter-spacing: -0.027em;
+  color: var(--nu-red);
+}
+
+.masthead__tagline {
+  font-family: "Lora", serif;
+  font-style: italic;
+  font-size: clamp(18px, 1.8vw, 26px);
+  color: var(--nu-teal);
+}
+
+.broadside__copy {
+  max-width: 840px;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(16px, 1.4vw, 20px);
+  line-height: 1.5;
+  text-align: center;
+  color: var(--nu-grey);
+}
+
+/* Headings with a rule either side. */
+.tier-heading {
+  display: flex;
+  align-items: center;
   gap: 24px;
+  width: 100%;
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.tier-heading::before,
+.tier-heading::after {
+  content: "";
+  flex: 1;
+  height: var(--rule, 1px);
+  background: currentColor;
+}
+
+.tier-heading--title { --rule: 2px; font-size: clamp(24px, 2.4vw, 34px); color: var(--nu-red); }
+.tier-heading--teal { font-size: clamp(22px, 2.2vw, 32px); color: var(--nu-teal); }
+.tier-heading--red { font-size: clamp(22px, 2.2vw, 32px); color: var(--nu-red); }
+
+.tier {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  width: 100%;
+}
+
+/* ---- Title sponsor advertising label ---- */
+
+.title-label {
+  position: relative;
+  display: grid;
+  grid-template-columns: 142px 1fr 142px;
+  align-items: center;
+  width: min(1060px, 100%);
+  min-height: 240px;
+  padding: 18px 46px;
+  background: var(--nu-gold);
+  border: 2px solid var(--nu-ink);
+}
+
+/* Inner ornamental border. */
+.title-label::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 2px solid var(--nu-red);
+  pointer-events: none;
+}
+
+.title-label__decoration {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: normal;
+  color: var(--nu-red);
+  white-space: nowrap;
+}
+
+.title-label__decoration img { width: 68px; height: 68px; }
+
+.title-label__slot {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  min-height: 200px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.title-label__medallion {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: min(596px, 100%);
+  height: auto;
+  pointer-events: none;
+}
+
+.title-label__kicker,
+.title-label__name,
+.title-label__note {
+  position: relative;
+}
+
+.title-label__kicker {
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.23em;
+  text-transform: uppercase;
+  color: var(--nu-red);
+}
+
+.title-label__name {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 54px);
+  line-height: normal;
+  color: var(--nu-teal);
+}
+
+.title-label__note {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--nu-grey);
+}
+
+@media (max-width: 900px) {
+  .title-label { grid-template-columns: 1fr; padding: 24px 20px; }
+  .title-label__decoration { display: none; }
+  .title-label__slot { white-space: normal; }
+}
+
+/* ---- Postage stamps ---- */
+
+.stamps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
   list-style: none;
 }
 
-/* Jharokha-arch frames waiting for logos. */
-.sponsor-slot {
+/* Perforations: cream dots centred on each edge, so the clipped halves read as notches. */
+.stamp {
+  --stamp: var(--nu-teal);
+  position: relative;
+  flex: 1 1 340px;
+  max-width: 392px;
+  min-height: 158px;
+  padding: 14px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 6px 0, var(--nu-cream) 6px, transparent 6.5px) 6px 0 / 24px 12px repeat-x,
+    radial-gradient(circle at 6px 12px, var(--nu-cream) 6px, transparent 6.5px) 6px 100% / 24px 12px repeat-x,
+    radial-gradient(circle at 0 6px, var(--nu-cream) 6px, transparent 6.5px) 0 6px / 12px 24px repeat-y,
+    radial-gradient(circle at 12px 6px, var(--nu-cream) 6px, transparent 6.5px) 100% 6px / 12px 24px repeat-y,
+    var(--stamp);
+  transition: translate 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stamp--red { --stamp: var(--nu-red); }
+
+.stamp:hover {
+  translate: 0 -4px;
+  box-shadow: 0 10px 0 -4px rgba(36, 34, 28, 0.25);
+}
+
+.stamp__contents {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  min-height: 180px;
-  padding: 32px 16px 20px;
+  height: 100%;
+  padding: 12px;
+  border: 1px solid var(--nu-gold);
+  color: var(--nu-cream);
   text-align: center;
-  color: var(--ink);
-  background: var(--cream);
-  border: 3px solid var(--ink);
-  border-radius: 110px 110px 6px 6px;
-  box-shadow: 6px 6px 0 var(--marigold);
+  white-space: nowrap;
 }
 
-.sponsor-slot__role {
-  padding: 0 12px;
-  font-weight: 800;
-  font-size: 14px;
-  letter-spacing: 0.06em;
+.stamp__kicker {
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--cream);
-  background: var(--maroon);
 }
 
-.sponsor-slot__name {
+.stamp__name {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 2.6vw, 34px);
+  line-height: normal;
+}
+
+/* Long names wrap onto two lines at a smaller size. */
+.stamp__name--long {
+  font-size: clamp(20px, 2vw, 26px);
+  line-height: 1.15;
+  white-space: normal;
+}
+
+/* Short rule – star – rule. */
+.stamp__ornament {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 14px;
+  color: var(--nu-gold);
+}
+
+.stamp__ornament::before,
+.stamp__ornament::after {
+  content: "";
+  width: 62px;
+  height: 1px;
+  background: var(--nu-gold);
+}
+
+/* ---- Partnership invitation ---- */
+
+.invitation {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  padding: 26px 28px;
+  background: var(--nu-beige);
+  border: 1px solid var(--nu-teal);
+}
+
+.invitation__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 792px;
+}
+
+.invitation__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(24px, 2.4vw, 35px);
+  line-height: normal;
+  color: var(--nu-teal);
+}
+
+.invitation__copy p {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(15px, 1.3vw, 18px);
+  line-height: 1.5;
+  color: var(--nu-ink);
+}
+
+/* Maroon button on a chunky ink backing. */
+.invitation__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 292px;
+  max-width: 100%;
+  padding: 16px 24px;
+  margin: 7px 10px 10px 7px;
   font-family: var(--font-display);
   font-size: 24px;
-  line-height: 1.15;
-  color: var(--ink);
+  line-height: normal;
+  color: #fff;
+  background: var(--nu-red);
+  border: 2px solid var(--nu-cream);
+  box-shadow: 0 0 0 7px var(--nu-ink), 3px 3px 0 7px var(--nu-ink);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: translate 0.15s ease, box-shadow 0.15s ease, background-color 0.2s;
 }
 
-/* Arches hang from the top edge and sway when pointed at. */
-.sponsor-slot {
-  position: relative;
-  overflow: hidden;
-  transform-origin: top center;
+.invitation__cta:hover,
+.invitation__cta:focus-visible {
+  background: var(--nu-teal);
+  translate: -2px -2px;
+  box-shadow: 0 0 0 7px var(--nu-ink), 6px 6px 0 7px var(--nu-ink);
 }
 
-.sponsor-slot:hover {
-  animation: swing 0.8s ease-in-out;
-}
-
-/* The major sponsor gets a double-width marigold arch with a passing shine. */
-.sponsor-slot--major::after {
-  content: "";
-  position: absolute;
-  inset: -20% auto -20% 0;
-  width: 30%;
-  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.55), transparent);
-  rotate: 12deg;
-  animation: shine 3.5s ease-in-out infinite;
-  pointer-events: none;
-}
-
-.sponsor-slot--major {
-  grid-column: span 2;
-  background: var(--marigold);
-  box-shadow: 6px 6px 0 var(--rani);
-}
-
-.sponsor-slot--major .sponsor-slot__name { font-size: 36px; }
-
-@media (max-width: 520px) {
-  .sponsor-slot--major { grid-column: auto; }
-}
-
-.sponsors__cta {
-  display: flex;
-  justify-content: center;
-  margin-top: 48px;
-}
-
-.sponsors__btn {
-  font-size: 24px;
-  padding: 16px 32px;
-  color: var(--ink);
-  background: var(--marigold);
-}
-
-.sponsors__btn:hover,
-.sponsors__btn:focus-visible {
-  color: var(--cream);
+.invitation__cta:active {
+  translate: 3px 3px;
+  box-shadow: 0 0 0 7px var(--nu-ink);
 }

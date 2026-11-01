@@ -1,0 +1,9 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="596" height="200" viewBox="0 0 596 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Label medallion">
+<path d="M596 100C596 155.228 462.581 200 298 200C133.419 200 0 155.228 0 100C0 44.7715 133.419 0 298 0C462.581 0 596 44.7715 596 100Z" fill="#FCF9ED"/>
+<mask id="stroke0_0_11" fill="white">
+<path d="M596 100C596 155.228 462.581 200 298 200C133.419 200 0 155.228 0 100C0 44.7715 133.419 0 298 0C462.581 0 596 44.7715 596 100Z"/>
+</mask>
+<path d="M596 100C596 155.228 462.581 200 298 200C133.419 200 0 155.228 0 100C0 44.7715 133.419 0 298 0C462.581 0 596 44.7715 596 100Z" stroke-width="4" stroke="#A71E2D" mask="url(#stroke0_0_11)"/>
+</g>
+</svg>
