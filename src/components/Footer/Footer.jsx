@@ -47,14 +47,15 @@ const SOCIALS = [
   { label: 'WhatsApp', href: LINKS.whatsapp, icon: whatsapp },
 ]
 
-// Sets --p (0 → 1, eased) as the footer scrolls into view, and --mx/--my
-// (-1 → 1) from the pointer, for the layered parallax in Footer.css.
+// Sets --p and --p-top (0 → 1, eased) as the footer scrolls into view, and
+// --mx/--my (-1 → 1) from the pointer, for the layered parallax in Footer.css.
 function useParallax(ref) {
   useEffect(() => {
     const el = ref.current
     if (!el) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       el.style.setProperty('--p', 1)
+      el.style.setProperty('--p-top', 1)
       return
     }
 
@@ -63,10 +64,16 @@ function useParallax(ref) {
       frame = 0
       const rect = el.getBoundingClientRect()
       const vh = window.innerHeight
-      const raw = Math.min(1, Math.max(0, (vh - rect.top) / Math.min(rect.height, vh * 0.9)))
-      const eased = 1 - Math.pow(1 - raw, 3)
-      el.style.setProperty('--p', eased.toFixed(4))
-      el.style.setProperty('--scroll', ((vh - rect.top) / vh).toFixed(4))
+      // Fraction of the footer's height that has scrolled into view (1 = bottom
+      // edge at the bottom of the viewport). Most layers animate over 10% → 100%;
+      // the corner ornaments and logo sit at the very top, so they settle early.
+      const visible = (vh - rect.top) / rect.height
+      const band = (from, to) => {
+        const t = Math.min(1, Math.max(0, (visible - from) / (to - from)))
+        return (t * t * (3 - 2 * t)).toFixed(4)
+      }
+      el.style.setProperty('--p', band(0.1, 1))
+      el.style.setProperty('--p-top', band(0.05, 0.4))
     }
     const schedule = () => { if (!frame) frame = requestAnimationFrame(update) }
 

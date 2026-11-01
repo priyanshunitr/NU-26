@@ -4,6 +4,7 @@
 
 .footer {
   --p: 0;
+  --p-top: 0; /* corners and logo: an earlier window of the scroll-in */
   --mx: 0;
   --my: 0;
   --sand: #f6dfc2;
@@ -21,6 +22,7 @@
 .footer__stage {
   --u: calc(100cqw / 2766);
   --inv: calc(1 - var(--p));
+  --inv-top: calc(1 - var(--p-top));
   position: relative;
   width: 100%;
   aspect-ratio: 2766 / 2233;
@@ -49,13 +51,13 @@
 .footer__corner--floral {
   left: 0;
   width: calc(1285 * var(--u));
-  transform: translate(calc(var(--inv) * -45%), calc(var(--inv) * -45%));
+  transform: translate(calc(var(--inv-top) * -45%), calc(var(--inv-top) * -45%));
 }
 
 .footer__corner--teal {
   left: calc(1623 * var(--u));
   width: calc(1143 * var(--u));
-  transform: translate(calc(var(--inv) * 45%), calc(var(--inv) * -45%));
+  transform: translate(calc(var(--inv-top) * 45%), calc(var(--inv-top) * -45%));
 }
 
 /* Mehndi hands reach in from the sides and follow the pointer a touch. */
@@ -89,9 +91,9 @@
   top: calc(210 * var(--u));
   width: calc(1201 * var(--u));
   transform:
-    translateY(calc(var(--inv) * -140%))
-    rotate(calc(-1.52deg + var(--inv) * -12deg))
-    scale(calc(0.7 + 0.3 * var(--p)));
+    translateY(calc(var(--inv-top) * -140%))
+    rotate(calc(-1.52deg + var(--inv-top) * -12deg))
+    scale(calc(0.7 + 0.3 * var(--p-top)));
 }
 
 /* The maroon arch rises up to frame the links. */
@@ -274,6 +276,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .footer { --p: 1; }
+  .footer { --p: 1; --p-top: 1; }
   .footer__layer { will-change: auto; }
 }
