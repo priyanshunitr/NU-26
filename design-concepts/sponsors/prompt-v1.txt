@@ -1,0 +1,27 @@
+Generation mode: built-in Image Gen
+Reference: D:/Claude/Nu/desi-collage-kit/painterly-v2/assembled-preview.png
+Output: sponsors-concept-v1.png
+
+Use case: ui-mockup / style-transfer.
+Transform the attached Nitrutsav painted hero design into ONE polished desktop SPONSORS SECTION mockup for the same university cultural festival website. The attachment is the visual style reference: preserve its highly detailed hand-painted Indian pop-art collage, saturated burgundy paisley, hot pink lotuses, turquoise, vermilion, emerald, tiny gold accents and printed-paper texture. This is a new section design, not the hero with its title swapped. Do not include the navigation bar or the giant Nitrutsav logo.
+
+Target dimensions: approximately 1440 pixels wide by 1320 pixels high, a complete standalone website section, straight-on UI screenshot without a device, browser chrome, perspective or presentation board. Show all content comfortably without clipping.
+
+Design direction: "The Patron Courtyard". A clear, elegant sponsor hierarchy surrounded by elaborate painted Indian festival ephemera. Rich burgundy background with low-contrast paisley texture and a fine turquoise/hot-pink floral textile border at top and bottom. Keep the middle spacious and readable; colorful painted lotuses, small ornamental arch fragments, a gramophone and folded decorative fan can overlap ONLY the outside margins and corners. No large portraits or other elements competing with the sponsor marks. No yellow wash, sepia cast, dingy beige, excessive gold, neon gradients, glass UI or 3D objects. Bright colors and crisp cool-white paper areas.
+
+Layout:
+At the top, a centered oversized festive hand-lettered heading "Sponsors" in bright warm white with a subtle magenta painted shadow; small turquoise/pink lotus flourishes on either side. Under it, the exact subtitle "Great celebrations are made together." in readable white.
+Below, tier labels on small tasteful red/turquoise ribbons with fine painted outlines.
+First tier label "MAJOR SPONSOR": one broad centered cool-white ornamental ticket-shaped plaque, largest sponsor mark, with "Gaylords Group" in elegant deep burgundy typography.
+Second tier label "PLATINUM SPONSORS": three evenly spaced equal-sized cool-white stamp-like plaques on one row, containing the names "HPCL", "Hotel Neelam", and "OCAC". Under OCAC use small readable text "Odisha Computer Application Centre".
+Third tier label "GOLD SPONSOR": one medium-sized centered cool-white label containing "OHPC Ltd", with generous air around it.
+Fourth tier label "OUR PARTNERS": five smaller aligned cool-white logo labels across one row, with clean typography and these exact pairings:
+"SBI" / "Transaction partner"
+"GAIL" / "Energy partner"
+"EaseMyTrip" / "Travel partner"
+"Odisha Shines" / "Media partner"
+"Rourkela Shines" / "Media partner".
+Use these brand names as typographic mock marks; do not invent pictorial brand insignias. Preserve names and capitalization. The sponsor data is supplied from the existing project, no additional sponsors.
+Bottom: a restrained horizontal invitation with the heading "Add your name to the celebration." and a clearly readable small painted turquoise button "Become a partner" with a white right arrow.
+
+Make this look like an actual thoughtfully designed sponsor section ready to implement: consistent tier spacing, aligned logo baselines, visual prominence proportional to tier, uncluttered white mark areas, rich hand-painted edge illustrations, coherent with the supplied hero. Every name is readable. At most two type families: characterful Yatra One-like display lettering and clean supporting sans serif. Use the base burgundy page surface between tiers rather than putting the entire section into one huge card. One design only, no alternatives or numbered labels.
