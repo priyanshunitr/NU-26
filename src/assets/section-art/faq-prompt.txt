@@ -1,0 +1,8 @@
+Use case: stylized-concept.
+Asset type: finished raster background artwork for the FAQ section of an Indian cultural festival website, portrait 1024 by 1536 composition.
+Primary request: A flat elegant warm ivory handmade paper textile print. Very fine muted burgundy Sambalpuri-inspired geometric diamonds and small floral block-print motifs form vertical ornamental bands confined to the outer left and right 12 percent of the artwork. Center 70 percent is almost empty warm ivory with only faint paper grain: this is negative space for opaque FAQ panels. A thin muted burgundy ornamental horizontal border runs near the top and near the bottom.
+Style: sophisticated Indian craft print, delicately imperfect ink, fine detail, rhythmic consistent repetition, subtle and restrained, flat scan of printed paper, no dimensional lighting.
+Color palette: warm ivory #f7f3e7 base with faded dusty rose ink derived from burgundy #7a1424 at very low contrast; tiny muted ochre details only if appropriate. Keep pattern visible but quiet.
+Constraints: background artwork ONLY, no text, no letters, no numbers, no UI, no cards, no logos, no watermark, no shadows, no fabric folds, no photographic setting. Do not fill the central region with motifs. The border must feel premium and handcrafted and frame a calm reading area.
+
+Generated with the built-in image_gen tool; original output preserved.

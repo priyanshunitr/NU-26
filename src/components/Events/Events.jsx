@@ -1,5 +1,7 @@
 import SectionHeading from '../SectionHeading/SectionHeading.jsx'
 import { LINKS } from '../../content/links.js'
+import useSectionParallax from '../../lib/useSectionParallax.js'
+import eventsPaper from '../../assets/section-art/events-paper.webp'
 import './Events.css'
 
 // Events published on nitrutsav.in so far. Each gets its own truck-art colourway.
@@ -44,13 +46,13 @@ const EVENTS = [
 
 // 3D tilt toward the pointer, like holding a poster up to the light.
 function tilt(e) {
-  if (e.pointerType !== 'mouse') return
+  if (e.pointerType !== 'mouse' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
   const card = e.currentTarget
   const r = card.getBoundingClientRect()
   const x = (e.clientX - r.left) / r.width - 0.5
   const y = (e.clientY - r.top) / r.height - 0.5
-  card.style.setProperty('--ry', `${(x * 14).toFixed(2)}deg`)
-  card.style.setProperty('--rx', `${(-y * 14).toFixed(2)}deg`)
+  card.style.setProperty('--ry', `${(x * 5).toFixed(2)}deg`)
+  card.style.setProperty('--rx', `${(-y * 5).toFixed(2)}deg`)
 }
 
 function untilt(e) {
@@ -59,8 +61,12 @@ function untilt(e) {
 }
 
 export default function Events() {
+  const sectionRef = useSectionParallax()
   return (
-    <section id="events" className="section events">
+    <section id="events" className="section events" ref={sectionRef}>
+      <div className="events__art" aria-hidden="true">
+        <img src={eventsPaper} alt="" loading="lazy" decoding="async" />
+      </div>
       <div className="container">
         <SectionHeading kicker="कार्यक्रम" title="Events" />
         <p className="events__intro" data-reveal="rise">
@@ -73,7 +79,7 @@ export default function Events() {
             <li
               key={title}
               className="event-card"
-              data-reveal="rise"
+              data-reveal="poster"
               style={{ '--card-bg': bg, '--card-fg': fg, '--card-accent': accent, '--d': i % 3 }}
               onPointerMove={tilt}
               onPointerLeave={untilt}

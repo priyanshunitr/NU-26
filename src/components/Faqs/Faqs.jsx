@@ -1,5 +1,7 @@
+import { useId, useState } from 'react'
 import SectionHeading from '../SectionHeading/SectionHeading.jsx'
 import { LINKS, CONTACTS, ADDRESS } from '../../content/links.js'
+import paperDivider from '../../assets/section-art/paper-divider.webp'
 import './Faqs.css'
 
 const ext = { target: '_blank', rel: 'noopener noreferrer' }
@@ -41,21 +43,37 @@ const FAQS = [
   },
 ]
 
+function FaqItem({ q, a, index }) {
+  const [open, setOpen] = useState(index === 0)
+  const id = useId()
+  return (
+    <div className="faq" data-open={open} data-reveal="faq" style={{ '--d': index % 3 }}>
+      <h3 className="faq__heading">
+        <button className="faq__q" id={`${id}-question`} aria-expanded={open}
+          aria-controls={`${id}-answer`} onClick={() => setOpen((value) => !value)}>
+          <span className="faq__num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+          <span>{q}</span>
+          <span className="faq__icon" aria-hidden="true">+</span>
+        </button>
+      </h3>
+      <div className="faq__panel" id={`${id}-answer`} role="region"
+        aria-labelledby={`${id}-question`} aria-hidden={!open} inert={!open}>
+        <div className="faq__panel-inner"><p className="faq__a">{a}</p></div>
+      </div>
+    </div>
+  )
+}
+
 export default function Faqs() {
   return (
     <section id="faqs" className="section faqs">
+      <div className="faqs__divider" aria-hidden="true">
+        <img src={paperDivider} alt="" loading="lazy" decoding="async" />
+      </div>
       <div className="container faqs__inner">
         <SectionHeading kicker="सवाल जवाब" title="FAQs" />
         <div className="faqs__list">
-          {FAQS.map(({ q, a }, i) => (
-            <details key={q} className="faq" open={i === 0} data-reveal="rise" style={{ '--d': i }}>
-              <summary className="faq__q">
-                <span className="faq__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-                <span>{q}</span>
-              </summary>
-              <p className="faq__a">{a}</p>
-            </details>
-          ))}
+          {FAQS.map((faq, index) => <FaqItem key={faq.q} {...faq} index={index} />)}
         </div>
       </div>
     </section>
