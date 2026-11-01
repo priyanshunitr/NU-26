@@ -1,177 +1,279 @@
+/* Footer from the 2026 Figma frame (2766 × 2233). Layers sit at their frame
+   coordinates via --u, then slide, rise, spin and settle as --p goes 0 → 1
+   while the footer scrolls in. --mx/--my add a little pointer drift. */
+
 .footer {
+  --p: 0;
+  --mx: 0;
+  --my: 0;
+  --sand: #f6dfc2;
+  --gold-soft: #dac7ab;
+  --gold-text: #f1dac4;
+  --cream-text: #ecdecb;
+
   position: relative;
-  color: var(--cream);
-  background:
-    radial-gradient(rgba(242, 165, 22, 0.16) 1.4px, transparent 1.6px) 0 0 / 18px 18px,
-    var(--maroon);
-  border-top: 3px solid var(--ink);
+  container-type: inline-size;
+  background: var(--sand);
+  color: var(--cream-text);
+  overflow: hidden;
 }
 
-/* Marigold garland (toran) hanging from the top edge. */
-.footer {
-  overflow-x: clip;
-}
-
-.footer::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -14px;
-  right: -14px;
-  animation: sway 2.6s ease-in-out infinite alternate;
-  height: 28px;
-  background:
-    radial-gradient(circle at 14px 6px, var(--marigold) 9px, transparent 10px) 0 0 / 28px 28px repeat-x,
-    radial-gradient(circle at 28px 14px, var(--saffron) 6px, transparent 7px) 0 0 / 28px 28px repeat-x;
-}
-
-.footer__inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: clamp(32px, 5vw, 56px);
-  padding-top: clamp(72px, 9vw, 112px);
-  padding-bottom: 32px;
-}
-
-.footer__socials {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px 40px;
-  list-style: none;
-}
-
-.footer__social {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-display);
-  font-size: 24px;
-  text-transform: uppercase;
-  text-decoration: none;
-}
-
-.footer__social:hover { color: var(--marigold); }
-
-.footer__social:hover svg { animation: wobble 0.6s ease-in-out; }
-
-.footer__logo:hover { animation: wiggle 0.6s ease-in-out; }
-
-/* The logo SVG is black; invert it to cream for the dark footer. */
-.footer__logo {
-  width: min(100%, 960px);
-  height: auto;
-  filter: invert(96%) sepia(8%) saturate(400%) hue-rotate(10deg) drop-shadow(5px 5px 0 var(--ink));
-}
-
-.footer__contact {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
+.footer__stage {
+  --u: calc(100cqw / 2766);
+  --inv: calc(1 - var(--p));
+  position: relative;
   width: 100%;
+  aspect-ratio: 2766 / 2233;
+  overflow: hidden;
+}
+
+.footer__layer {
+  position: absolute;
+  max-width: none;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Mandala line-work: fades in while spinning up to rest. */
+.footer__mandala {
+  left: calc(264 * var(--u));
+  top: calc(-63 * var(--u));
+  width: calc(2237 * var(--u));
+  opacity: calc(0.46 * var(--p));
+  transform: rotate(calc(var(--inv) * -30deg)) scale(calc(0.7 + 0.3 * var(--p)));
+}
+
+/* Corner ornaments slide in from off-canvas. */
+.footer__corner { top: 0; }
+
+.footer__corner--floral {
+  left: 0;
+  width: calc(1285 * var(--u));
+  transform: translate(calc(var(--inv) * -45%), calc(var(--inv) * -45%));
+}
+
+.footer__corner--teal {
+  left: calc(1623 * var(--u));
+  width: calc(1143 * var(--u));
+  transform: translate(calc(var(--inv) * 45%), calc(var(--inv) * -45%));
+}
+
+/* Mehndi hands reach in from the sides and follow the pointer a touch. */
+.footer__hand {
+  width: calc(1066 * var(--u));
+  transform-origin: 0 50%;
+}
+
+.footer__hand--right {
+  left: calc(1756 * var(--u));
+  top: calc(402 * var(--u));
+  transform-origin: 100% 50%;
+  transform:
+    translate(calc(var(--inv) * 70% + var(--mx) * 12px), calc(var(--my) * 8px))
+    rotate(calc(var(--inv) * 18deg));
+}
+
+.footer__hand--left {
+  left: calc(-19 * var(--u));
+  top: calc(369 * var(--u));
+  transform-origin: 50% 50%;
+  transform:
+    translate(calc(var(--inv) * -70% + var(--mx) * 12px), calc(var(--my) * 8px))
+    rotate(calc(var(--inv) * -18deg))
+    scaleX(-1);
+}
+
+/* Gold logo drops from above and settles on its designed tilt. */
+.footer__logo {
+  left: calc(794 * var(--u));
+  top: calc(210 * var(--u));
+  width: calc(1201 * var(--u));
+  transform:
+    translateY(calc(var(--inv) * -140%))
+    rotate(calc(-1.52deg + var(--inv) * -12deg))
+    scale(calc(0.7 + 0.3 * var(--p)));
+}
+
+/* The maroon arch rises up to frame the links. */
+.footer__arch {
+  left: calc(-108 * var(--u));
+  top: calc(648 * var(--u));
+  width: calc(2982 * var(--u));
+  transform: translateY(calc(var(--inv) * 30%));
+}
+
+/* Bottom collage rises last, from well below. */
+.footer__collage {
+  left: calc(-30 * var(--u));
+  top: calc(1282 * var(--u));
+  width: calc(2853 * var(--u));
+  transform: translateY(calc(var(--inv) * 70%));
+}
+
+.footer__lotus {
+  left: calc(762 * var(--u));
+  top: calc(1586 * var(--u));
+  width: calc(1267 * var(--u));
+  opacity: var(--p);
+}
+
+/* ---- Text inside the arch (desktop) ---- */
+
+.footer__tagline {
+  position: absolute;
+  left: calc(911 * var(--u));
+  top: calc(1222 * var(--u));
+  width: calc(944 * var(--u));
+  font-family: "Inria Serif", serif;
+  font-style: italic;
+  font-size: calc(58 * var(--u));
+  line-height: normal;
+  text-align: center;
+  color: var(--gold-soft);
+  opacity: var(--p);
+  transform: translateY(calc(var(--inv) * 40px));
+}
+
+.footer__columns {
+  position: absolute;
+  left: calc(609 * var(--u));
+  top: calc(1456 * var(--u));
+  width: calc(1548 * var(--u));
+  display: grid;
+  grid-template-columns: calc(255 * var(--u)) calc(450 * var(--u)) calc(403 * var(--u)) 1fr;
+  align-items: start;
+  opacity: var(--p);
+  transform: translateY(calc(var(--inv) * 60px));
+}
+
+.footer__column {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
+/* Gold gradient dividers between columns, as in the frame. */
+.footer__column + .footer__column::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: calc(-3 * var(--u));
+  width: calc(4 * var(--u));
+  height: calc(291 * var(--u));
+  background: linear-gradient(to bottom, rgba(218, 199, 171, 0.1), #dac7ab 50%, rgba(218, 199, 171, 0.1));
+}
+
 .footer__heading {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 32px;
-  line-height: 1;
-  color: var(--marigold);
+  margin-bottom: calc(32 * var(--u));
+  font-family: "Instrument Sans", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: calc(33 * var(--u));
+  line-height: normal;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-text);
 }
 
-.footer__people {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-  width: 100%;
-  list-style: none;
-}
-
-.footer__person {
+.footer__column ul {
   display: flex;
   flex-direction: column;
-  padding: 16px;
-  border: 2px dashed rgba(252, 249, 237, 0.45);
-  border-radius: 12px;
-}
-
-.footer__person-name {
-  font-weight: 800;
-  font-size: 18px;
-}
-
-.footer__person-role {
-  font-size: 14px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--marigold);
-}
-
-.footer__person a {
-  margin-top: 4px;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.footer__person a:hover { color: var(--marigold); }
-
-.footer__person:hover {
-  transform: translateY(-4px);
-  border-color: var(--marigold);
-  border-style: solid;
-}
-
-.footer__address {
-  max-width: 48ch;
-  font-style: normal;
-  font-size: 15px;
-  opacity: 0.85;
-}
-
-.footer__credit a:hover { color: var(--marigold); }
-
-.footer__bottom {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px 32px;
-  width: 100%;
-  padding-top: 24px;
-  border-top: 2px dashed rgba(252, 249, 237, 0.35);
-}
-
-.footer__legal {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 28px;
+  gap: calc(18 * var(--u));
   list-style: none;
-  font-size: 16px;
 }
 
-.footer__legal a:hover { color: var(--marigold); }
+.footer__column a {
+  font-family: "Instrument Sans", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: calc(30 * var(--u));
+  line-height: normal;
+  letter-spacing: 0.1em;
+  color: var(--cream-text);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s, translate 0.2s;
+}
+
+.footer__column a:hover,
+.footer__column a:focus-visible {
+  color: #fff;
+  translate: 0 -2px;
+}
+
+.footer__socials {
+  gap: calc(40 * var(--u)) !important;
+}
+
+.footer__socials img {
+  width: calc(59 * var(--u));
+  height: auto;
+  transition: transform 0.25s var(--spring);
+}
+
+.footer__socials a:hover img { transform: scale(1.15) rotate(-8deg); }
 
 .footer__credit {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(1860 * var(--u));
+  font-family: "Instrument Sans", system-ui, sans-serif;
   font-weight: 600;
-  font-size: 16px;
+  font-size: calc(33 * var(--u));
+  line-height: normal;
+  letter-spacing: 0.1em;
+  text-align: center;
+  color: #fff;
+  opacity: var(--p);
 }
 
-.footer__heart {
-  display: inline-block;
-  color: var(--rani);
-  animation: heartbeat 1.4s ease-in-out infinite;
+/* ---- Stacked links for narrower screens ---- */
+
+.footer__stack {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding: 40px var(--gutter) 32px;
+  background: #5a0d16;
 }
 
-@keyframes heartbeat {
-  0%, 60%, 100% { scale: 1; }
-  15%, 35% { scale: 1.35; }
-  25% { scale: 1.1; }
+.footer__tagline--stack,
+.footer__columns--stack,
+.footer__credit--stack {
+  position: static;
+  width: auto;
+  opacity: 1;
+  transform: none;
 }
 
-@media (max-width: 600px) {
-  .footer__bottom { justify-content: center; text-align: center; }
-  .footer__legal { justify-content: center; }
+.footer__tagline--stack { font-size: clamp(20px, 3vw, 28px); max-width: 32ch; }
+
+.footer__columns--stack {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 32px 16px;
+  width: 100%;
+  max-width: 900px;
+}
+
+.footer__columns--stack .footer__column + .footer__column::before { display: none; }
+.footer__columns--stack .footer__heading { margin-bottom: 14px; font-size: 15px; }
+.footer__columns--stack ul { gap: 10px; }
+.footer__columns--stack a { font-size: 15px; letter-spacing: 0.06em; }
+.footer__columns--stack .footer__socials { flex-direction: row; gap: 24px !important; }
+.footer__columns--stack .footer__socials img { width: 36px; }
+.footer__credit--stack { font-size: 14px; }
+
+@media (max-width: 1199px) {
+  .footer__stage .footer__tagline,
+  .footer__stage .footer__columns,
+  .footer__stage .footer__credit,
+  .footer__lotus { display: none; }
+  .footer__stack { display: flex; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer { --p: 1; }
+  .footer__layer { will-change: auto; }
 }

@@ -5,6 +5,7 @@ export const LINKS = {
   events: `${SITE}/events`,
   mun: `${SITE}/register/mun`,
   merch: `${SITE}/merch`,
+  team: `${SITE}/team#contact`,
   brochure: 'https://drive.google.com/drive/folders/1mhJPIqkhvivsAPsKli1a7xEq2tXqdt91',
   instagram: 'https://www.instagram.com/nitrutsav_nitr',
   whatsapp: 'https://whatsapp.com/channel/0029Vb7VdBI4Crfn867OO73q',
