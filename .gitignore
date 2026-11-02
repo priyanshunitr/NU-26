@@ -1,3 +1,10 @@
 node_modules
 dist
 .claude
+
+# Design working files from the hero rebuild (hundreds of MB, not part of the site)
+desi-collage-kit
+figma-recreation
+qa
+scripts
+design-qa.md

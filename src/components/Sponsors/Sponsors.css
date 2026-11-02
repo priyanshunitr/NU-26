@@ -1,439 +1,105 @@
-/* Sponsors NU'26 — matches the Figma frame (1728 × 1349). Colours and type
-   are the frame's own; sizes scale down with clamp() for smaller screens. */
+@font-face {
+  font-family: 'Sponsors Inter';
+  src: url('../../assets/fonts/Inter-Variable.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bree Serif';
+  src: url('../../assets/fonts/BreeSerif-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
 
 .sponsors {
-  --nu-teal: #075a52;
-  --nu-red: #a71e2d;
-  --nu-gold: #f5c545;
-  --nu-cream: #fcf9ed;
-  --nu-beige: #f3ebcf;
-  --nu-ink: #24221c;
-  --nu-grey: #625b4b;
-
+  --sponsors-cream: #fff9e8;
+  --sponsors-ink: #62051b;
+  --sponsors-unit: calc(100cqw / 1308);
+  container-type: inline-size;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   overflow: hidden;
-  background: var(--nu-teal);
-  color: var(--nu-ink);
-  scroll-margin-top: 16px;
+  color: var(--sponsors-ink);
+  background: #ffdec2;
+  font-family: 'Bree Serif', Georgia, serif;
 }
 
-/* ---- Collage margins (only on wide screens, where the frame has room) ---- */
-
-.sponsors__margin {
-  display: none;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 120px;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.sponsors__margin--left { left: 0; }
-.sponsors__margin--right { right: 0; }
-
-.sponsors__edging {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  height: 470px;
-  margin-top: 30px;
-  padding: 22px 0;
-  background: var(--nu-red);
-}
-
-/* The hero collage, rotated the same way as in the hero, clipped to the margin. */
-.sponsors__ephemera {
-  position: absolute;
-  top: 498px;
-  width: 1728px;
-  height: 972px;
-  display: grid;
-  place-items: center;
-}
-
-.sponsors__margin--left .sponsors__ephemera { left: 0; }
-.sponsors__margin--right .sponsors__ephemera { right: 0; }
-
-.sponsors__ephemera img {
-  width: 972px;
-  height: 1728px;
-  object-fit: cover;
-  rotate: -90deg;
-}
-
-@media (min-width: 1500px) {
-  .sponsors__margin { display: block; }
-}
-
-/* ---- Block-print borders ---- */
-
-.sponsors__border {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.sponsors__stage {
+  position: relative;
   width: 100%;
-  height: 30px;
-  padding: 0 12px;
-  font-family: "Lora", serif;
-  font-size: 23px;
-  line-height: 1;
-  color: var(--nu-cream);
-  overflow: hidden;
+  aspect-ratio: 1308 / 1305;
+  isolation: isolate;
 }
 
-.sponsors__border span:nth-child(even) { color: var(--nu-gold); }
+.sponsors__stage::before, .sponsors__stage::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 50%;
+  z-index: -2;
+  pointer-events: none;
+  background: url('../../assets/sponsors/painted/ivory-paisley.webp') top center / 100% 100%;
+}
+.sponsors__stage::after { inset: 50% 0 0; transform: scaleY(-1); }
+.sponsors__scenery { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.sponsors__edge { position: absolute; top: 0; height: calc(1100 * var(--sponsors-unit)); max-width: none; user-select: none; }
+.sponsors__edge--left { left: 0; width: calc(490 * var(--sponsors-unit)); clip-path: inset(0 0 45.45% 0); }
+.sponsors__edge--right { right: 0; width: calc(512 * var(--sponsors-unit)); }
+.sponsors__edge--left-front { top: calc(230 * var(--sponsors-unit)); left: 0; width: calc(512 * var(--sponsors-unit)); transform: scaleX(-1); }
+.sponsors__edge--right-front { top: calc(345 * var(--sponsors-unit)); right: 0; width: calc(490 * var(--sponsors-unit)); transform: scaleX(-1); }
+.sponsors__art { position: absolute; max-width: none; pointer-events: none; user-select: none; }
 
+.sponsors__heading { position: absolute; top: calc(8 * var(--sponsors-unit)); width: 100%; text-align: center; }
+.sponsors__title { margin: 0; font: 400 calc(146 * var(--sponsors-unit))/1 'Bree Serif', Georgia, serif; text-shadow: calc(3 * var(--sponsors-unit)) calc(7 * var(--sponsors-unit)) #df0b57; }
+.sponsors__tier { position: absolute; left: 0; width: 100%; text-align: center; }
+.sponsors__tier--platinum { top: calc(258 * var(--sponsors-unit)); }
+.sponsors__tier--gold { top: calc(537 * var(--sponsors-unit)); }
+.sponsors__tier--partners { top: calc(931 * var(--sponsors-unit)); }
+.sponsors__tier-title { position: relative; display: grid; place-items: center; width: calc(440 * var(--sponsors-unit)); height: calc(40 * var(--sponsors-unit)); margin: 0 auto; color: var(--sponsors-cream); font: 700 calc(18 * var(--sponsors-unit))/1.2 'Sponsors Inter', Arial, sans-serif; letter-spacing: calc(.5 * var(--sponsors-unit)); text-transform: uppercase; }
+.sponsors__tier-title span { position: relative; }
+.sponsors__cards { display: flex; justify-content: center; flex-wrap: wrap; margin: calc(39 * var(--sponsors-unit)) auto 0; padding: 0; list-style: none; }
+.sponsors__card { position: relative; flex: none; width: calc(278 * var(--sponsors-unit)); height: calc(110 * var(--sponsors-unit)); }
+.sponsors__card-copy { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: calc(2 * var(--sponsors-unit)); padding: 0 9%; }
+.sponsors__name { font-size: calc(var(--name-size) * var(--sponsors-unit)); line-height: 1.08; white-space: nowrap; }
+.sponsors__detail { font: 600 calc(14 * var(--sponsors-unit))/1.2 'Sponsors Inter', Arial, sans-serif; white-space: nowrap; }
+.sponsors__card--ocac .sponsors__detail { font-size: calc(10 * var(--sponsors-unit)); }
+.sponsors__tier--platinum .sponsors__card { width: calc(535 * var(--sponsors-unit)); height: calc(142 * var(--sponsors-unit)); }
+.sponsors__tier--gold .sponsors__cards { width: calc(580 * var(--sponsors-unit)); gap: calc(33 * var(--sponsors-unit)) calc(24 * var(--sponsors-unit)); margin-top: calc(48 * var(--sponsors-unit)); }
+.sponsors__tier--partners .sponsors__cards { width: calc(608 * var(--sponsors-unit)); gap: calc(40 * var(--sponsors-unit)) calc(40 * var(--sponsors-unit)); transform: translateX(calc(-12 * var(--sponsors-unit))); }
+.sponsors__tier--partners .sponsors__card { width: calc(176 * var(--sponsors-unit)); height: calc(105 * var(--sponsors-unit)); }
+.sponsors__tier--partners .sponsors__card:nth-child(n + 4) { transform: translateX(calc(12 * var(--sponsors-unit))); }
+
+/* Keep the two-column Gold grid readable when the full poster no longer fits. */
 @media (max-width: 700px) {
-  .sponsors__border span:nth-child(3n), .sponsors__border span:nth-child(3n + 1) { display: none; }
+  .sponsors { --sponsors-unit: 1px; }
+  .sponsors__stage { aspect-ratio: auto; padding: 28px 34px 38px; }
+  .sponsors__stage::before, .sponsors__stage::after { background-size: 900px auto; }
+  .sponsors__edge { width: 290px; height: 650px; }
+  .sponsors__edge--left { left: -30px; clip-path: none; }
+  .sponsors__edge--right { right: -30px; }
+  .sponsors__edge--left-front { top: auto; bottom: 0; left: -30px; }
+  .sponsors__edge--right-front { top: auto; bottom: -65px; right: -30px; }
+  .sponsors__heading, .sponsors__tier { position: relative; inset: auto; }
+  .sponsors__title { font-size: clamp(48px, 14vw, 88px); text-shadow: 2px 4px #df0b57; }
+  .sponsors__tier { margin-top: 32px; }
+  .sponsors__tier-title { width: min(100%, 360px); height: 32px; font-size: 12px; letter-spacing: .3px; }
+  .sponsors__cards { margin-top: 20px; }
+  .sponsors__name { font-size: min(calc(var(--name-size) * .66px), 32px); }
+  .sponsors__detail { font-size: 10px; white-space: normal; }
+  .sponsors__card--ocac .sponsors__detail { max-width: 100px; font-size: 9px; }
+  .sponsors__tier--platinum .sponsors__card { width: min(100%, 430px); height: clamp(90px, 24vw, 125px); }
+  .sponsors__tier--platinum .sponsors__name { font-size: clamp(24px, 6.1vw, 39px); }
+  .sponsors__tier--gold .sponsors__cards { width: min(100%, 500px); gap: 18px 12px; margin-top: 22px; }
+  .sponsors__tier--gold .sponsors__card { width: calc(50% - 6px); height: clamp(78px, 19vw, 105px); }
+  .sponsors__tier--gold .sponsors__name { font-size: clamp(16px, 4vw, 28px); }
+  .sponsors__tier--partners .sponsors__cards { width: min(100%, 440px); gap: 20px 12px; transform: none; }
+  .sponsors__tier--partners .sponsors__card { width: calc(50% - 6px); max-width: 190px; height: 100px; }
+  .sponsors__tier--partners .sponsors__card:nth-child(n + 4) { transform: none; }
+  .sponsors__tier--partners .sponsors__name { font-size: clamp(16px, 4vw, 22px); white-space: normal; }
 }
 
-/* ---- The broadside ---- */
-
-.broadside {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 28px;
-  width: min(1424px, 100% - 32px);
-  padding: clamp(24px, 3vw, 38px) clamp(16px, 4.5vw, 64px) clamp(28px, 3vw, 44px);
-  background: var(--nu-cream);
-}
-
-.masthead {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.masthead__flower {
-  width: clamp(48px, 6.5vw, 94px);
-  height: auto;
-  animation: spin 40s linear infinite;
-}
-
-.masthead__flower:last-child { animation-direction: reverse; }
-
-.masthead__heading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  text-align: center;
-}
-
-.masthead__title {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(56px, 7.8vw, 112px);
-  line-height: 1.05;
-  letter-spacing: -0.027em;
-  color: var(--nu-red);
-}
-
-.masthead__tagline {
-  font-family: "Lora", serif;
-  font-style: italic;
-  font-size: clamp(18px, 1.8vw, 26px);
-  color: var(--nu-teal);
-}
-
-.broadside__copy {
-  max-width: 840px;
-  font-family: "Inter", system-ui, sans-serif;
-  font-size: clamp(16px, 1.4vw, 20px);
-  line-height: 1.5;
-  text-align: center;
-  color: var(--nu-grey);
-}
-
-/* Headings with a rule either side. */
-.tier-heading {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  width: 100%;
-  font-family: var(--font-display);
-  font-weight: 400;
-  line-height: normal;
-  white-space: nowrap;
-}
-
-.tier-heading::before,
-.tier-heading::after {
-  content: "";
-  flex: 1;
-  height: var(--rule, 1px);
-  background: currentColor;
-}
-
-.tier-heading--title { --rule: 2px; font-size: clamp(24px, 2.4vw, 34px); color: var(--nu-red); }
-.tier-heading--teal { font-size: clamp(22px, 2.2vw, 32px); color: var(--nu-teal); }
-.tier-heading--red { font-size: clamp(22px, 2.2vw, 32px); color: var(--nu-red); }
-
-.tier {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 28px;
-  width: 100%;
-}
-
-/* ---- Title sponsor advertising label ---- */
-
-.title-label {
-  position: relative;
-  display: grid;
-  grid-template-columns: 142px 1fr 142px;
-  align-items: center;
-  width: min(1060px, 100%);
-  min-height: 240px;
-  padding: 18px 46px;
-  background: var(--nu-gold);
-  border: 2px solid var(--nu-ink);
-}
-
-/* Inner ornamental border. */
-.title-label::after {
-  content: "";
-  position: absolute;
-  inset: 8px;
-  border: 2px solid var(--nu-red);
-  pointer-events: none;
-}
-
-.title-label__decoration {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  font-family: var(--font-display);
-  font-size: 22px;
-  line-height: normal;
-  color: var(--nu-red);
-  white-space: nowrap;
-}
-
-.title-label__decoration img { width: 68px; height: 68px; }
-
-.title-label__slot {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  min-height: 200px;
-  text-align: center;
-  white-space: nowrap;
-}
-
-.title-label__medallion {
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  width: min(596px, 100%);
-  height: auto;
-  pointer-events: none;
-}
-
-.title-label__kicker,
-.title-label__name,
-.title-label__note {
-  position: relative;
-}
-
-.title-label__kicker {
-  font-family: "Inter", system-ui, sans-serif;
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.23em;
-  text-transform: uppercase;
-  color: var(--nu-red);
-}
-
-.title-label__name {
-  font-family: var(--font-display);
-  font-size: clamp(32px, 4vw, 54px);
-  line-height: normal;
-  color: var(--nu-teal);
-}
-
-.title-label__note {
-  font-family: "Inter", system-ui, sans-serif;
-  font-size: 14px;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: var(--nu-grey);
-}
-
-@media (max-width: 900px) {
-  .title-label { grid-template-columns: 1fr; padding: 24px 20px; }
-  .title-label__decoration { display: none; }
-  .title-label__slot { white-space: normal; }
-}
-
-/* ---- Postage stamps ---- */
-
-.stamps {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 24px;
-  width: 100%;
-  list-style: none;
-}
-
-/* Perforations: cream dots centred on each edge, so the clipped halves read as notches. */
-.stamp {
-  --stamp: var(--nu-teal);
-  position: relative;
-  flex: 1 1 340px;
-  max-width: 392px;
-  min-height: 158px;
-  padding: 14px;
-  overflow: hidden;
-  background:
-    radial-gradient(circle at 6px 0, var(--nu-cream) 6px, transparent 6.5px) 6px 0 / 24px 12px repeat-x,
-    radial-gradient(circle at 6px 12px, var(--nu-cream) 6px, transparent 6.5px) 6px 100% / 24px 12px repeat-x,
-    radial-gradient(circle at 0 6px, var(--nu-cream) 6px, transparent 6.5px) 0 6px / 12px 24px repeat-y,
-    radial-gradient(circle at 12px 6px, var(--nu-cream) 6px, transparent 6.5px) 100% 6px / 12px 24px repeat-y,
-    var(--stamp);
-  transition: translate 0.2s ease, box-shadow 0.2s ease;
-}
-
-.stamp--red { --stamp: var(--nu-red); }
-
-.stamp:hover {
-  translate: 0 -4px;
-  box-shadow: 0 10px 0 -4px rgba(36, 34, 28, 0.25);
-}
-
-.stamp__contents {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  height: 100%;
-  padding: 12px;
-  border: 1px solid var(--nu-gold);
-  color: var(--nu-cream);
-  text-align: center;
-  white-space: nowrap;
-}
-
-.stamp__kicker {
-  font-family: "Inter", system-ui, sans-serif;
-  font-weight: 600;
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-.stamp__name {
-  font-family: var(--font-display);
-  font-size: clamp(26px, 2.6vw, 34px);
-  line-height: normal;
-}
-
-/* Long names wrap onto two lines at a smaller size. */
-.stamp__name--long {
-  font-size: clamp(20px, 2vw, 26px);
-  line-height: 1.15;
-  white-space: normal;
-}
-
-/* Short rule – star – rule. */
-.stamp__ornament {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: "Inter", system-ui, sans-serif;
-  font-size: 14px;
-  color: var(--nu-gold);
-}
-
-.stamp__ornament::before,
-.stamp__ornament::after {
-  content: "";
-  width: 62px;
-  height: 1px;
-  background: var(--nu-gold);
-}
-
-/* ---- Partnership invitation ---- */
-
-.invitation {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  width: 100%;
-  padding: 26px 28px;
-  background: var(--nu-beige);
-  border: 1px solid var(--nu-teal);
-}
-
-.invitation__copy {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 792px;
-}
-
-.invitation__title {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(24px, 2.4vw, 35px);
-  line-height: normal;
-  color: var(--nu-teal);
-}
-
-.invitation__copy p {
-  font-family: "Inter", system-ui, sans-serif;
-  font-size: clamp(15px, 1.3vw, 18px);
-  line-height: 1.5;
-  color: var(--nu-ink);
-}
-
-/* Maroon button on a chunky ink backing. */
-.invitation__cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 292px;
-  max-width: 100%;
-  padding: 16px 24px;
-  margin: 7px 10px 10px 7px;
-  font-family: var(--font-display);
-  font-size: 24px;
-  line-height: normal;
-  color: #fff;
-  background: var(--nu-red);
-  border: 2px solid var(--nu-cream);
-  box-shadow: 0 0 0 7px var(--nu-ink), 3px 3px 0 7px var(--nu-ink);
-  text-decoration: none;
-  white-space: nowrap;
-  transition: translate 0.15s ease, box-shadow 0.15s ease, background-color 0.2s;
-}
-
-.invitation__cta:hover,
-.invitation__cta:focus-visible {
-  background: var(--nu-teal);
-  translate: -2px -2px;
-  box-shadow: 0 0 0 7px var(--nu-ink), 6px 6px 0 7px var(--nu-ink);
-}
-
-.invitation__cta:active {
-  translate: 3px 3px;
-  box-shadow: 0 0 0 7px var(--nu-ink);
+@media (min-width: 501px) and (max-width: 700px) {
+  .sponsors__tier--partners .sponsors__cards { width: min(100%, 550px); }
+  .sponsors__tier--partners .sponsors__card { width: calc((100% - 24px) / 3); }
 }

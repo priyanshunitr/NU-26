@@ -1,76 +1,80 @@
-import { useId } from 'react'
-import collage from '../../assets/collage.jpg'
-import logo from '../../assets/logo.svg'
-import registerPaper from '../../assets/register-paper.png'
+import artwork from '../../assets/hero/artwork.json'
+import registerPlaque from '../../assets/hero/register-ivory-plaque.png'
+import { LINKS } from '../../content/links.js'
 import PosterTrail from './PosterTrail.jsx'
 import './Hero.css'
 
+const images = import.meta.glob('../../assets/hero/*.webp', {
+  eager: true, import: 'default', query: '?url',
+})
+
 const NAV_LINKS = [
-  { label: 'Home', href: '#' },
-  { label: 'About', href: '#about' },
-  { label: 'Events', href: '#events' },
-  { label: 'FAQs', href: '#faqs' },
-  { label: 'Sponsors', href: '#sponsors' },
+  { label: 'Home', href: '#home', center: 404, size: 30.19, scale: 0.718 },
+  { label: 'About', href: '#about', center: 516.5, size: 28.33, scale: 0.809 },
+  { label: 'Events', href: '#events', center: 630, size: 30.17, scale: 0.737 },
+  { label: 'FAQs', href: '#faqs', center: 735.5, size: 21.93, scale: 1.054 },
+  { label: 'Sponsors', href: '#sponsors', center: 863.5, size: 22.39, scale: 1.01 },
 ]
 
-// Hover state of the Figma "REGISTER NOW" component: a 1px inside stroke whose
-// cream colour fades out across the last ~20% of the word. CSS text-stroke can't
-// do gradients or inside alignment, so it's drawn in SVG (260 × 44 design box).
-function RegisterOutline() {
-  const id = useId().replace(/[^a-zA-Z0-9]/g, '')
-  const text = (props) => (
-    <text x="0" y="34" fontSize="36" letterSpacing="0.72" {...props}>
-      REGISTER NOW
-    </text>
-  )
+function placementStyle(asset) {
+  const style = { '--rotation': asset.rotation + 'deg' }
+  for (const [mode, geometry] of Object.entries({ d: asset.desktop, m: asset.mobile })) {
+    for (const [key, value] of Object.entries(geometry)) {
+      style['--' + mode + '-' + key] = value + '%'
+    }
+  }
+  return style
+}
 
+function CollageAsset({ asset }) {
+  const isLogo = asset.id === 23
+  const Element = isLogo ? 'h1' : 'div'
   return (
-    <svg className="hero__register-outline" viewBox="0 0 260 44" aria-hidden="true">
-      <defs>
-        <linearGradient id={`${id}-stroke`} x1="0" x2="1" y1="0" y2="0">
-          <stop offset="0.803" stopColor="#f7f3e7" />
-          <stop offset="1" stopColor="#f7f3e7" stopOpacity="0.18" />
-        </linearGradient>
-        <clipPath id={`${id}-clip`}>{text()}</clipPath>
-      </defs>
-      {text({
-        fill: 'rgba(0, 0, 0, 0.2)',
-        stroke: `url(#${id}-stroke)`,
-        strokeWidth: 2,
-        clipPath: `url(#${id}-clip)`,
-      })}
-    </svg>
+    <Element
+      className={'hero__asset hero__asset--' + asset.id + (isLogo ? ' hero__title' : '')}
+      style={placementStyle(asset)}
+      aria-hidden={isLogo ? undefined : true}
+      data-artwork={asset.name}
+    >
+      <img
+        src={images['../../assets/hero/' + asset.file]}
+        width={asset.width}
+        height={asset.height}
+        alt=""
+        draggable={false}
+        fetchPriority={isLogo || asset.id === 0 ? 'high' : 'auto'}
+      />
+      {isLogo && <span className="sr-only">Nitrutsav 2026 â€” NIT Rourkela</span>}
+    </Element>
   )
 }
 
-export default function Hero({ activeLink = 'Home', registerHref = '#register' }) {
+export default function Hero({ activeLink = 'Home' }) {
   return (
-    <header className="hero">
+    <header className="hero" id="home">
       <div className="hero__stage">
-        <img className="hero__collage" src={collage} alt="" />
+        {artwork.map((asset) => <CollageAsset key={asset.id} asset={asset} />)}
+
+        {/* Preserve the original poster sequence, mask, pointer logic and timing. */}
         <PosterTrail />
 
-        <nav aria-label="Primary">
+        <nav className="hero__navigation" aria-label="Primary">
           <ul className="hero__nav">
-            {NAV_LINKS.map(({ label, href }) => (
-              <li key={label}>
+            {NAV_LINKS.map(({ label, href, center, size, scale }) => (
+              <li key={label} style={{ '--center': center / 1308 * 100 + '%', '--label-size': size, '--label-scale': scale }}>
                 <a href={href} aria-current={label === activeLink ? 'page' : undefined}>
-                  {label}
+                  <span>{label}</span>
                 </a>
               </li>
             ))}
           </ul>
         </nav>
 
-        <h1 className="hero__title">
-          <img src={logo} width="726" height="162" alt="" />
-          <span className="sr-only">Nitrutsav 2026 — NIT Rourkela</span>
-        </h1>
-
-        <a className="hero__register" href={registerHref}>
-          <img src={registerPaper} alt="" />
-          <span className="hero__register-label">REGISTER NOW</span>
-          <RegisterOutline />
+        <a className="hero__register" href={LINKS.events}>
+          <span className="hero__register-art" aria-hidden="true">
+            <img src={registerPlaque} alt="" draggable={false} />
+          </span>
+          <span className="hero__register-label">Register Now</span>
         </a>
       </div>
     </header>
