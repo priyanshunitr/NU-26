@@ -1,140 +1,76 @@
-import collage from '../../assets/collage.jpg'
-import flowerSm from '../../assets/sponsors/flower-a.svg'
-import flowerLg from '../../assets/sponsors/flower-b.svg'
-import flowerMd from '../../assets/sponsors/flower-c.svg'
-import medallion from '../../assets/sponsors/label-medallion.svg'
+import leftCollage from '../../assets/sponsors/painted/left-collage.webp'
+import rightCollage from '../../assets/sponsors/painted/right-collage.webp'
+import plaque from '../../assets/sponsors/painted/sponsor-plaque.webp'
+import ribbon from '../../assets/sponsors/painted/tier-ribbon.webp'
 import './Sponsors.css'
 
-// Built from the "Sponsors NU'26" frame in Figma: a cream partnership
-// broadside inside a teal frame, with block-print borders and collage margins.
-// Sponsors and tiers are as listed on nitrutsav.in/sponsors.
-
-const TITLE = { name: 'Gaylords Group', role: 'Major sponsor' }
-
+// Figma: eZRrupmfELMP2DGwMiOJPB, Frame 1 / 88:7784 (1308 × 1305).
 const TIERS = [
-  {
-    heading: 'Platinum sponsors', tone: 'teal',
-    stamps: [
-      { name: 'HPCL', role: 'Platinum sponsor' },
-      { name: 'Hotel Neelam', role: 'Platinum sponsor' },
-      { name: 'Odisha Computer Application Centre', role: 'Platinum sponsor' },
-    ],
-  },
-  {
-    heading: 'Gold sponsor', tone: 'red',
-    stamps: [{ name: 'OHPC Ltd', role: 'Gold sponsor' }],
-  },
-  {
-    heading: 'Partners', tone: 'teal',
-    stamps: [
-      { name: 'SBI', role: 'Transaction partner' },
-      { name: 'GAIL (India) Limited', role: 'Energy partner' },
-      { name: 'EaseMyTrip', role: 'Travel partner' },
-      { name: 'Odisha Shines', role: 'Media partner' },
-      { name: 'Rourkela Shines', role: 'Media partner' },
-    ],
-  },
+  { id: 'platinum', title: 'Platinum sponsor', sponsors: [
+    { name: 'Gaylords Group', size: 53 },
+  ] },
+  { id: 'gold', title: 'Gold sponsor', sponsors: [
+    { name: 'HPCL', size: 34 },
+    { name: 'OHPC Ltd', size: 34 },
+    { name: 'Hotel Neelam', size: 33 },
+    { name: 'OCAC', size: 43, detail: 'Odisha Computer Application Centre' },
+  ] },
+  { id: 'partners', title: 'Our partners', sponsors: [
+    { name: 'SBI', size: 32, detail: 'Transaction partner' },
+    { name: 'GAIL', size: 32, detail: 'Energy partner' },
+    { name: 'Rourkela Shines', size: 20, detail: 'Media partner' },
+    { name: 'EaseMyTrip', size: 24, detail: 'Travel partner' },
+    { name: 'Odisha Shines', size: 22, detail: 'Media partner' },
+  ] },
 ]
 
-function BlockPrintBorder() {
+// Position transparent artwork by its painted bounds, retaining the complete PNGs.
+const ART = {
+  plaque: { src: plaque, width: 1983, height: 793, bounds: [8, 135, 1976, 657] },
+  ribbon: { src: ribbon, width: 1983, height: 793, bounds: [46, 305, 1938, 479] },
+}
+
+function PaintedArt({ kind }) {
+  const { src, width, height, bounds: [left, top, right, bottom] } = ART[kind]
+  return <img className="sponsors__art" src={src} alt="" aria-hidden="true" loading="lazy" decoding="async" draggable={false}
+    style={{ left: (-left / (right - left) * 100) + '%', top: (-top / (bottom - top) * 100) + '%',
+      width: (width / (right - left) * 100) + '%', height: (height / (bottom - top) * 100) + '%' }} />
+}
+
+function SponsorCard({ name, detail, size }) {
   return (
-    <div className="sponsors__border" aria-hidden="true">
-      {Array.from({ length: 36 }, (_, i) => <span key={i}>✦</span>)}
-    </div>
+    <li className={'sponsors__card' + (detail ? ' sponsors__card--detail' : '') + (name === 'OCAC' ? ' sponsors__card--ocac' : '')}
+      style={{ '--name-size': size }}>
+      <PaintedArt kind="plaque" />
+      <div className="sponsors__card-copy">
+        <span className="sponsors__name">{name}</span>
+        {detail && <span className="sponsors__detail">{detail}</span>}
+      </div>
+    </li>
   )
 }
 
-function CollageMargin({ side }) {
+export default function Sponsors() {
   return (
-    <div className={`sponsors__margin sponsors__margin--${side}`} aria-hidden="true">
-      <div className="sponsors__edging">
-        {Array.from({ length: 4 }, (_, i) => <img key={i} src={flowerSm} alt="" width="54" height="54" />)}
-      </div>
-      <div className="sponsors__ephemera">
-        <img src={collage} alt="" />
-      </div>
-    </div>
-  )
-}
-
-export default function Sponsors({ contactHref = '#contact' }) {
-  return (
-    <section id="sponsors" className="sponsors">
-      <CollageMargin side="left" />
-      <CollageMargin side="right" />
-
-      <BlockPrintBorder />
-
-      <div className="broadside">
-        <header className="masthead" data-reveal="rise">
-          <img className="masthead__flower" src={flowerLg} alt="" width="94" height="94" />
-          <div className="masthead__heading">
-            <h2 className="masthead__title">Sponsors</h2>
-            <p className="masthead__tagline">Great celebrations are made together.</p>
-          </div>
-          <img className="masthead__flower" src={flowerLg} alt="" width="94" height="94" />
+    <section id="sponsors" className="sponsors" aria-labelledby="sponsors-title">
+      <div className="sponsors__stage">
+        <div className="sponsors__scenery" aria-hidden="true">
+          <img className="sponsors__edge sponsors__edge--left" src={leftCollage} alt="" loading="lazy" decoding="async" />
+          <img className="sponsors__edge sponsors__edge--right" src={rightCollage} alt="" loading="lazy" decoding="async" />
+          <img className="sponsors__edge sponsors__edge--left-front" src={rightCollage} alt="" loading="lazy" decoding="async" />
+          <img className="sponsors__edge sponsors__edge--right-front" src={leftCollage} alt="" loading="lazy" decoding="async" />
+        </div>
+        <header className="sponsors__heading">
+          <h2 id="sponsors-title" className="sponsors__title">Sponsors</h2>
         </header>
 
-        <p className="broadside__copy" data-reveal="rise">
-          A place for brands that champion creativity, culture and the spirit of campus.
-          <br />
-          Meet the partners behind the Carnival of Colours 2026.
-        </p>
-
-        <h3 className="tier-heading tier-heading--title" data-reveal="rise">
-          <span>Title sponsor</span>
-        </h3>
-
-        <div className="title-label" data-reveal="stamp">
-          <div className="title-label__decoration">
-            <img src={flowerMd} alt="" width="68" height="68" />
-            <span>Carnival of</span>
-          </div>
-          <div className="title-label__slot">
-            <img className="title-label__medallion" src={medallion} alt="" width="596" height="200" />
-            <span className="title-label__kicker">{TITLE.role}</span>
-            <span className="title-label__name">{TITLE.name}</span>
-            <span className="title-label__note">Nitrutsav 2026 · NIT Rourkela</span>
-          </div>
-          <div className="title-label__decoration">
-            <img src={flowerMd} alt="" width="68" height="68" />
-            <span>Colours 2026</span>
-          </div>
-        </div>
-
-        {TIERS.map(({ heading, tone, stamps }) => (
-          <div key={heading} className="tier">
-            <h3 className={`tier-heading tier-heading--${tone}`} data-reveal="rise">
-              <span>{heading}</span>
-            </h3>
-            <ul className="stamps">
-              {stamps.map(({ name, role }, i) => (
-                <li key={name} className={`stamp stamp--${tone}`} data-reveal="stamp" style={{ '--d': i % 3 }}>
-                  <div className="stamp__contents">
-                    <span className="stamp__kicker">{role}</span>
-                    <span className={`stamp__name${name.length > 16 ? ' stamp__name--long' : ''}`}>{name}</span>
-                    <span className="stamp__ornament" aria-hidden="true">✦</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
+        {TIERS.map(({ id, title, sponsors }) => (
+          <div key={id} className={'sponsors__tier sponsors__tier--' + id}>
+            <h3 className="sponsors__tier-title"><PaintedArt kind="ribbon" /><span>{title}</span></h3>
+            <ul className="sponsors__cards">{sponsors.map(sponsor => <SponsorCard key={sponsor.name} {...sponsor} />)}</ul>
           </div>
         ))}
-
-        <div className="invitation" data-reveal="rise">
-          <div className="invitation__copy">
-            <h3 className="invitation__title">Add your name to the celebration.</h3>
-            <p>
-              Help bring student creativity to life at NIT Rourkela.
-              <br />
-              Reach the organising team below to partner with us.
-            </p>
-          </div>
-          <a className="invitation__cta" href={contactHref}>Become a partner</a>
-        </div>
       </div>
-
-      <BlockPrintBorder />
     </section>
   )
 }

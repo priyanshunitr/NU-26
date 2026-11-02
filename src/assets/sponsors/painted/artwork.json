@@ -1,0 +1,105 @@
+[
+  {
+    "name": "ivory-paisley",
+    "source": "../../../../design-concepts/vectors/ivory-paisley-thin.svg",
+    "web": "ivory-paisley.webp",
+    "size": [2616, 1302],
+    "provenance": "Peach and ivory color variant of the user's previously traced paisley vector, rendered at 2x for Frame 1 (88:7784). Editable SVG retained; no flattened screenshot used."
+  },
+  {
+    "name": "heading-lotus",
+    "source": "heading-lotus.png",
+    "web": "heading-lotus.webp",
+    "size": [
+      1254,
+      1254
+    ],
+    "alpha_bounds_128": [
+      21,
+      289,
+      1233,
+      926
+    ],
+    "provenance": "Generated using built-in ImageGen from selected sponsors reference"
+  },
+  {
+    "name": "left-collage",
+    "source": "left-collage.png",
+    "web": "left-collage.webp",
+    "size": [
+      836,
+      1881
+    ],
+    "alpha_bounds_128": [
+      0,
+      0,
+      601,
+      1879
+    ],
+    "provenance": "Generated using built-in ImageGen from selected sponsors reference"
+  },
+  {
+    "name": "partner-button",
+    "source": "partner-button.png",
+    "web": "partner-button.webp",
+    "size": [
+      2073,
+      758
+    ],
+    "alpha_bounds_128": [
+      103,
+      246,
+      1970,
+      513
+    ],
+    "provenance": "Generated using built-in ImageGen from selected sponsors reference"
+  },
+  {
+    "name": "right-collage",
+    "source": "right-collage.png",
+    "web": "right-collage.webp",
+    "size": [
+      856,
+      1838
+    ],
+    "alpha_bounds_128": [
+      301,
+      0,
+      856,
+      1838
+    ],
+    "provenance": "Generated using built-in ImageGen from selected sponsors reference"
+  },
+  {
+    "name": "sponsor-plaque",
+    "source": "sponsor-plaque.png",
+    "web": "sponsor-plaque.webp",
+    "size": [
+      1983,
+      793
+    ],
+    "alpha_bounds_128": [
+      8,
+      135,
+      1976,
+      657
+    ],
+    "provenance": "Generated using built-in ImageGen from selected sponsors reference"
+  },
+  {
+    "name": "tier-ribbon",
+    "source": "tier-ribbon.png",
+    "web": "tier-ribbon.webp",
+    "size": [
+      1983,
+      793
+    ],
+    "alpha_bounds_128": [
+      46,
+      305,
+      1938,
+      479
+    ],
+    "provenance": "Generated using built-in ImageGen from selected sponsors reference"
+  }
+]
