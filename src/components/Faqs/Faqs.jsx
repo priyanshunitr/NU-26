@@ -1,7 +1,13 @@
 import { useId, useState } from 'react'
-import SectionHeading from '../SectionHeading/SectionHeading.jsx'
+import CollageHeading from './CollageHeading.jsx'
 import { LINKS, CONTACTS, ADDRESS } from '../../content/links.js'
 import paperDivider from '../../assets/section-art/paper-divider.webp'
+import reader from '../../assets/faq-collage/reader.webp'
+import chai from '../../assets/faq-collage/chai.webp'
+import henna from '../../assets/faq-collage/henna.webp'
+import lotus from '../../assets/faq-collage/lotus.webp'
+import rose from '../../assets/faq-collage/rose.webp'
+import reel from '../../assets/faq-collage/reel.webp'
 import './Faqs.css'
 
 const ext = { target: '_blank', rel: 'noopener noreferrer' }
@@ -66,15 +72,26 @@ function FaqItem({ q, a, index }) {
 
 export default function Faqs() {
   return (
-    <section id="faqs" className="section faqs">
+    <section id="faqs" className="section faqs" aria-labelledby="faq-title">
       <div className="faqs__divider" aria-hidden="true">
         <img src={paperDivider} alt="" loading="lazy" decoding="async" />
       </div>
+      <div className="faqs__art" aria-hidden="true">
+        <img className="faqs__reader" src={reader} alt="" loading="lazy" decoding="async" />
+        <div className="faqs__chai-scene">
+          <img className="faqs__henna" src={henna} alt="" loading="lazy" decoding="async" />
+          <img className="faqs__chai" src={chai} alt="" loading="lazy" decoding="async" />
+        </div>
+        <img className="faqs__lotus" src={lotus} alt="" loading="lazy" decoding="async" />
+        <img className="faqs__rose" src={rose} alt="" loading="lazy" decoding="async" />
+        <img className="faqs__reel" src={reel} alt="" loading="lazy" decoding="async" />
+      </div>
       <div className="container faqs__inner">
-        <SectionHeading kicker="सवाल जवाब" title="FAQs" />
+        <CollageHeading />
         <div className="faqs__list">
           {FAQS.map((faq, index) => <FaqItem key={faq.q} {...faq} index={index} />)}
         </div>
+        <p className="faqs__signoff">बस आ जाओ। बाकी यहाँ मिलकर देखते हैं।</p>
       </div>
     </section>
   )

@@ -1,63 +1,60 @@
-# Events and FAQs design review
+# FAQ collage redesign review
 
 final result: passed
 
-## Source and scope
+## Scope and visual truth
 
-User screenshots are the visual baseline, with the approved changes to Events/FAQs backgrounds, transitions and motion. Hero, About, Sponsors, Footer, existing content, typography and links are preserved.
+User-approved redesign: reuse the individually generated Indian collage elements around a clear FAQ reading column; animate mixed cut-paper letter images at staggered intervals; refine accordion cards to fit the composition. Hindi सवाल जवाब remains above the animated FAQs heading. Existing FAQ answers and destination links are preserved. This is an intentional redesign, not a pixel-for-pixel clone of the old cards.
 
-Source visual truth:
-- /var/folders/kk/8kl41np93yq2072wspjq5f_40000gn/T/codex-clipboard-3826d3db-e385-46b4-bce7-1fff6b1e5566.png (Events)
-- /var/folders/kk/8kl41np93yq2072wspjq5f_40000gn/T/codex-clipboard-daf770d2-997c-44c6-9583-d4205db426d5.png (FAQs)
-- /var/folders/kk/8kl41np93yq2072wspjq5f_40000gn/T/codex-clipboard-e2751176-3158-42d4-a93f-f573def20520.png (unchanged hero)
+Source references:
+- design-assets/collage-elements-v1/reference/source-upright.png
+- design-assets/collage-elements-v1/contact-sheet.jpg (26 individually generated source elements)
+- output/review/faq-desktop.jpg (previous section before this iteration)
+- Original user FAQ image: /var/folders/kk/8kl41np93yq2072wspjq5f_40000gn/T/codex-clipboard-daf770d2-997c-44c6-9583-d4205db426d5.png
 
-Implementation: http://127.0.0.1:4173/
+Implementation: http://127.0.0.1:4173/#faqs
+Branch: codex/festival-backgrounds
+Earlier Events/FAQ review retained in output/review/previous-design-qa.md.
 
 ## Evidence and normalization
 
-Desktop CSS viewport: 1324 × 743. User images: 2648 × 1666; removed 180 px browser chrome and downsampled the 2648 × 1486 content to 1324 × 743. Implementation captures: 1324 × 743, screenshot density 1. Combined source/implementation boards: 2648 × 743, source left and implementation right.
+- Desktop: CSS viewport 1324 × 743, screenshot 1324 × 743.
+- Mobile: CSS viewport 390 × 844, screenshot 390 × 844.
+- output/review/faq-collage-desktop.jpg
+- output/review/faq-collage-mobile.jpg
+- output/review/faq-collage-comparison.jpg: old and new desktop views side by side, 2648 × 743.
+- output/review/faq-collage-heading-comparison.jpg: 2648 × 640 detail comparison, both 1:1 crops; old crop starts at y=0 and new at y=96 to align the Hindi labels.
 
-- output/review/events-desktop.jpg
-- output/review/faq-desktop.jpg
-- output/review/events-comparison.jpg
-- output/review/faq-comparison.jpg
-- output/review/events-mobile.jpg
-- output/review/faq-mobile.jpg
-- output/review/final-preview.jpg
+State: first FAQ open, other FAQs closed. The new heading cycles between real image variants; captured letter combinations differ by frame. Old capture begins near the Hindi label; the new full capture includes the section divider and top padding. Full-view framing differs by approximately 96px; the focused comparison aligns the labels without rescaling. The new heading has intentional additional height for the larger collage letters, introductory line and pause control.
 
-Mobile CSS viewport and screenshots: 390 × 844, density 1.
+Both reference artwork and before/after boards were opened and inspected. Individual desktop/mobile screenshots were also inspected for readable question copy, letter shapes, artwork clipping and card spacing.
 
-States: desktop Events first row revealed; desktop FAQ first answer expanded and other answers closed; mobile FAQ first and second answers expanded. Desktop Events capture starts approximately 65 px earlier relative to the heading than the reference; this is a scroll framing difference, not added heading-to-content spacing. FAQ comparison aligns first expanded cards. The new patterned surroundings are intentional differences from the source.
+## Findings and fixes
 
-Full-view source and implementation were inspected together in the comparison boards. Focused card, heading and answer details were also inspected in full-size viewport screenshots; these are readable at their captured resolution, so additional magnified crops were unnecessary.
-
-## Findings and iteration history
-
-1. [P1, fixed] FAQ toggling replaced the DOM class updated by the scroll observer, hiding toggled cards. Changed accordion state to a data-open attribute while keeping the reveal element's className stable. Re-tested repeated Enter toggles: aria-expanded changes correctly and is-visible remains. Final desktop and mobile FAQ captures show all in-view cards.
-2. [P2, fixed] Mobile Events background used fill sizing and elongated the rosette over the full six-card section. Changed mobile artwork to natural aspect ratio with reduced opacity. Final mobile capture retains readable cards without stretched motifs or horizontal overflow.
-3. No remaining P0/P1/P2 issues in the reviewed scope.
+- [P2, fixed] At 390px the left reader and right chai sat too close to the heading's first/last letter. Reduced mobile reader from 135px to 120px and chai group from 130px to 110px, with adjusted edge offsets. The final mobile capture shows a clear word and unobstructed questions.
+- No remaining P0/P1/P2 findings within this scope.
 
 ## Required fidelity surfaces
 
-- Typography: existing Irish Grover headings and Baloo 2 copy retained; visible font forms match the source. Heading hierarchy and Hindi labels preserved. Mobile questions wrap within the card without hitting the expansion control.
-- Layout rhythm: original three-column desktop event grid and ticket-style FAQ layout retained; Events spacing is tightened, card tilt restrained, FAQ answer expansion uses a grid transition. At 390 px the event grid becomes one column; no document horizontal overflow.
-- Colors: existing cream, paper, maroon, mustard, pink, indigo and teal tokens retained. Generated artwork is attenuated with layer opacity. FAQ panels remain opaque for readable contrast.
-- Images: three real generated raster assets, original PNGs retained and WebP delivery copies used. No placeholder illustrations. Events art crops naturally at desktop edges; FAQ print frames the text. Divider echoes the hero's printed torn-paper treatment.
-- Copy: event names, descriptions, question/answer copy and destination links unchanged.
+- Typography: existing Baloo 2 body font retained; new title uses eight real raster letter images, with readable F/A/Q/S in both variants. Hindi kicker remains text. Questions wrap cleanly on mobile and keep a separate expansion control. Semantic h2 remains FAQs.
+- Layout: centered 772px desktop card column, 13px row gaps, quiet paper panels and numbered tabs. Illustrations stay behind/around content. Mobile uses 22px side gutters and smaller artwork around the heading; the film reel is omitted at that size. Card controls measured at least 65px high on mobile. Document scroll width equals viewport width at 1324px and 390px.
+- Color: warm cream paper, maroon, teal and ochre remain aligned with the source collage. The textile pattern stays faint, with opaque readable answer surfaces. Heavy black shadows were intentionally replaced with restrained printed-paper edges.
+- Images: six existing prop PNGs reused, existing A/S letters reused, six new letter variants generated as transparent PNG masters. Fourteen optimized WebP files total approximately 682 KiB. All FAQ images load successfully. No stretched artwork, placeholder imagery or visible transparency boxes.
+- Content: all seven original questions/answers and links preserved. Added short intro and Hindi signoff. Decorative artwork excluded from the accessibility tree.
 
-## Functional validation
+## Functional verification
 
-- Production build: npm run build passed after final fixes.
-- git diff --check passed.
-- Browser console: no errors or warnings in the final inspected preview.
-- FAQ opening/closing checked with pointer and Enter; correct expanded state and labelled region relationships.
-- Closed answer panels have aria-hidden=true and inert, keeping their links out of keyboard navigation.
-- Event links retain existing targets and rel protections; link focus is visible.
-- Artwork loaded successfully in the browser.
-- Mobile parallax transform is none; no horizontal document overflow at desktop or mobile viewport.
-- Reduced-motion styles disable new reveal and accordion transitions; the parallax hook respects preference changes. OS reduced-motion toggling was not exercised through the browser tools.
-- Hero component, PosterTrail, hero styles/assets and global typography files have no changes relative to the published base commit e39a164.
+- npm run build: passed after final CSS change.
+- git diff --check: passed.
+- Browser console: no errors or warnings.
+- Desktop keyboard Enter toggles first and second answers repeatedly; cards remain visible after state updates.
+- Mobile keyboard activation opens event answer; its events link retains https://www.nitrutsav.in/events.
+- Closed panels have inert and aria-hidden=true, zero rendered height and hidden visibility. Expanded controls have matching aria-controls/labelled answer regions.
+- Heading variants change independently; Pause holds the same four variants across subsequent checks, Resume restarts swaps.
+- Navigating to Events places the heading outside the viewport; the four variants remain unchanged across checks separated by more than every configured interval.
+- Reduced-motion and hidden-tab event handling reviewed in source; timer and observer cleanup included. OS reduced-motion toggling was not exercised through the browser.
+- This iteration changes only FAQ components, their production assets and review/source documentation. Hero and existing hover interaction source is untouched.
 
-## Remaining test limits
+## Limits
 
-Browser review used the in-app Chromium browser. Native Safari and physical touch-device testing were not performed. No production deployment was made.
+Browser verification used the in-app browser. Native Safari and physical touch-device testing were not performed. This is a local preview; no production deployment was made.
